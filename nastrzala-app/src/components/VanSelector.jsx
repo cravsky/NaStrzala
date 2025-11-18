@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './VanSelector.module.css';
-import { vehicles } from '../data/vehicles';
+import { vehicles } from '../data/vehicles/index.js';
 
 function VanSelector({ onSelect }) {
   const [selectedValue, setSelectedValue] = useState('');
