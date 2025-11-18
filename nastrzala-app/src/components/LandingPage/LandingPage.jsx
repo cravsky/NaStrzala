@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './LandingPage.module.css';
-import VanSelector from './VanSelector';
-import DimensionsDialog from './DimensionsDialog';
+import VanSelector from '../VanSelector/VanSelector';
+import DimensionsDialog from '../DimensionsDialog/DimensionsDialog';
 
 function LandingPage() {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
