@@ -25,8 +25,6 @@ function LandingPage() {
         </p>
         <div className={styles.questions}>
           <p className={styles.question}>„Czy to wejdzie do busa?"</p>
-          <p className={styles.and}>i</p>
-          <p className={styles.question}>„Czy zrobimy to jednym kursem?"</p>
         </div>
       </header>
 

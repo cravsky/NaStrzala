@@ -1,10 +1,44 @@
 {
+  "id": "ducato_l2h2",
   "brand": "Fiat",
   "model": "Ducato",
   "variant": "L2H2",
-  "dimensions": {
-    "length": 4963,
-    "width": 2050,
-    "height": 2524
-  }
+  "unit": "mm",
+  "coordinate_system": {
+    "origin": "rear_left_floor_inside",
+    "axes": {
+      "x": "forward",
+      "y": "right",
+      "z": "up"
+    }
+  },
+  "cargo_box": {
+    "length": 3120,
+    "width": 1870,
+    "height": 1930
+  },
+  "wheelarches": [
+    {
+      "side": "left",
+      "x_from_rear": 1550,
+      "y_from_left": 0,
+      "length": 360,
+      "width": 225,
+      "height": 250
+    },
+    {
+      "side": "right",
+      "x_from_rear": 1550,
+      "y_from_left": 1645,
+      "length": 360,
+      "width": 225,
+      "height": 250
+    }
+  ],
+  "rear_door": {
+    "width": 1560,
+    "height": 1850,
+    "threshold_height": 55
+  },
+  "notes": "Platforma wspólna z Peugeot Boxer / Citroën Jumper; do solvera można traktować jako jeden typ nadwozia."
 }

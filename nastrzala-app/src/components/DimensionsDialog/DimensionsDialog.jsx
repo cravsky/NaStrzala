@@ -20,19 +20,19 @@ function DimensionsDialog({ vehicle, onClose }) {
         </div>
 
         <div className={styles.content}>
-          <h3 className={styles.subtitle}>Wymiary</h3>
+          <h3 className={styles.subtitle}>Wymiary przestrzeni ładunkowej</h3>
           <div className={styles.dimensions}>
             <div className={styles.dimension}>
               <span className={styles.label}>Długość:</span>
-              <span className={styles.value}>{vehicle.dimensions.length} mm</span>
+              <span className={styles.value}>{vehicle.cargo_box.length} mm</span>
             </div>
             <div className={styles.dimension}>
               <span className={styles.label}>Szerokość:</span>
-              <span className={styles.value}>{vehicle.dimensions.width} mm</span>
+              <span className={styles.value}>{vehicle.cargo_box.width} mm</span>
             </div>
             <div className={styles.dimension}>
               <span className={styles.label}>Wysokość:</span>
-              <span className={styles.value}>{vehicle.dimensions.height} mm</span>
+              <span className={styles.value}>{vehicle.cargo_box.height} mm</span>
             </div>
           </div>
         </div>

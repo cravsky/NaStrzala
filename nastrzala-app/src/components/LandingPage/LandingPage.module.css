@@ -6,7 +6,7 @@
 
 .header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
   padding: 2rem 0;
 }
 
@@ -39,13 +39,6 @@
   font-weight: 600;
   color: #2d3748;
   margin: 0.5rem 0;
-}
-
-.and {
-  font-size: 1.125rem;
-  color: #718096;
-  margin: 0.75rem 0;
-  font-style: italic;
 }
 
 .main {
