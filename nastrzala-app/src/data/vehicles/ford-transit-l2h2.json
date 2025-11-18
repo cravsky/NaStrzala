@@ -1,0 +1,10 @@
+{
+  "brand": "Ford",
+  "model": "Transit",
+  "variant": "L2H2",
+  "dimensions": {
+    "length": 5531,
+    "width": 2059,
+    "height": 2554
+  }
+}

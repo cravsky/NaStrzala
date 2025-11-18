@@ -1,0 +1,10 @@
+{
+  "brand": "Mercedes",
+  "model": "Sprinter",
+  "variant": "L2H2",
+  "dimensions": {
+    "length": 5932,
+    "width": 2020,
+    "height": 2520
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "brand": "Fiat",
+  "model": "Ducato",
+  "variant": "L2H2",
+  "dimensions": {
+    "length": 4963,
+    "width": 2050,
+    "height": 2524
+  }
+}
