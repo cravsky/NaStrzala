@@ -26,7 +26,7 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  max-width: 500px;
+  max-width: 1200px;
   width: 100%;
   animation: slideUp 0.3s ease;
 }
@@ -80,6 +80,95 @@
 
 .content {
   padding: 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.visualizationContainer {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  min-height: 500px;
+}
+
+.controls {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.vanDimensions {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #e2e8f0;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4299e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #3182ce;
+  transform: scale(1.1);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4299e1;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  background: #3182ce;
+  transform: scale(1.1);
+}
+
+.fitIndicator {
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-top: 1rem;
+}
+
+.fits {
+  background: #c6f6d5;
+  color: #22543d;
+  border: 2px solid #48bb78;
+}
+
+.doesNotFit {
+  background: #fed7d7;
+  color: #742a2a;
+  border: 2px solid #f56565;
 }
 
 .subtitle {
@@ -132,6 +221,23 @@
 
   .content {
     padding: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  .visualizationContainer {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 300px;
+  }
+
+  .controls {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .vanDimensions {
+    grid-column: 1;
+    grid-row: 3;
   }
 
   .dimension {
