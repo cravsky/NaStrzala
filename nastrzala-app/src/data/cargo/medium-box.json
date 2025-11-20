@@ -1,12 +1,13 @@
 {
   "id": "medium_box",
   "name": "Średnie pudło",
-  "description": "Pudło kartonowe średnie",
+  "description": "Pudo kartonowe średnie",
   "unit": "mm",
   "dimensions": {
     "length": 400,
     "width": 300,
     "height": 300
   },
+  "weight_kg": 8,
   "category": "box"
 }

@@ -1,12 +1,13 @@
 {
   "id": "refrigerator",
   "name": "Lodówka",
-  "description": "Standardowa lodówka wolnostojąca",
+  "description": "Standardowa lodówka wolnostojca",
   "unit": "mm",
   "dimensions": {
     "length": 600,
     "width": 600,
     "height": 1850
   },
+  "weight_kg": 80,
   "category": "appliance"
 }

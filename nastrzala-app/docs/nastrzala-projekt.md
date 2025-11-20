@@ -3,14 +3,11 @@
 ## Co to?
 Prosta aplikacja webowa, która w 20 sekund odpowiada na pytanie:
 **„Czy to wejdzie do busa?”**  
-i  
-**„Czy zrobimy to jednym kursem?”**
 
 ## Dla kogo?
 - firmy budowlane,
 - montażyści,
 - stolarze,
-- okniarze i drzwiowcy,
 - lokalne firmy przewozowe.
 
 ## Dlaczego?

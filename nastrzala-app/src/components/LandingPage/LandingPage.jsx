@@ -17,6 +17,10 @@ function LandingPage() {
     setSelectedCargo([...selectedCargo, cargo]);
   };
 
+  const handleRemoveCargo = (index) => {
+    setSelectedCargo(selectedCargo.filter((_, i) => i !== index));
+  };
+
   const handleOpenDialog = () => {
     if (selectedVehicle) {
       setIsDialogOpen(true);
@@ -42,7 +46,7 @@ function LandingPage() {
       <main className={styles.main}>
         <section className={styles.description}>
           <p>
-            Dla firm budowlanych, montażystów, stolarzy, okniarzy i lokalnych firm przewozowych.
+            Dla firm budowlanych, montażystów i lokalnych firm przewozowych.
             Bo drugi kurs to strata 50–200 zł i rozwalony dzień pracy.
           </p>
         </section>
@@ -56,6 +60,7 @@ function LandingPage() {
             <CargoSelector 
               onCargoSelected={handleCargoSelected}
               selectedCargo={selectedCargo}
+              onRemoveCargo={handleRemoveCargo}
             />
           </section>
         )}
