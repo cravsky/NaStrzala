@@ -1,0 +1,12 @@
+{
+  "id": "washing_machine",
+  "name": "Pralka",
+  "description": "Standardowa pralka automatyczna",
+  "unit": "mm",
+  "dimensions": {
+    "length": 600,
+    "width": 600,
+    "height": 850
+  },
+  "category": "appliance"
+}

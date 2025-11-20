@@ -66,6 +66,35 @@
   padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.buttonSection {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.checkButton {
+  padding: 15px 40px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.checkButton:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.checkButton:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {

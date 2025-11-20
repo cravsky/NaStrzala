@@ -206,6 +206,51 @@
   font-size: 1.125rem;
 }
 
+.cargoList {
+  grid-column: 2;
+  grid-row: 3;
+  margin-top: 1.5rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cargoItem {
+  padding: 1rem;
+  background: #f7fafc;
+  border-radius: 8px;
+  border-left: 4px solid #48bb78;
+}
+
+.cargoInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.cargoName {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.cargoQuantity {
+  font-weight: 700;
+  color: #48bb78;
+  font-size: 1.125rem;
+}
+
+.cargoDimensions {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
 @media (max-width: 768px) {
   .dialog {
     margin: 1rem;
@@ -238,6 +283,11 @@
   .vanDimensions {
     grid-column: 1;
     grid-row: 3;
+  }
+
+  .cargoList {
+    grid-column: 1;
+    grid-row: 4;
   }
 
   .dimension {

@@ -1,0 +1,13 @@
+{
+  "id": "industrial_pallet",
+  "name": "Paleta przemysłowa",
+  "description": "Paleta przemysłowa 1200×1000 mm",
+  "unit": "mm",
+  "dimensions": {
+    "length": 1200,
+    "width": 1000,
+    "height": 144
+  },
+  "typical_load_height": 1500,
+  "category": "pallet"
+}

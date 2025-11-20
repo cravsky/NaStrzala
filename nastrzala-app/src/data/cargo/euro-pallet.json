@@ -1,0 +1,13 @@
+{
+  "id": "euro_pallet",
+  "name": "Paleta EUR",
+  "description": "Standardowa paleta europejska (EPAL)",
+  "unit": "mm",
+  "dimensions": {
+    "length": 1200,
+    "width": 800,
+    "height": 144
+  },
+  "typical_load_height": 1500,
+  "category": "pallet"
+}

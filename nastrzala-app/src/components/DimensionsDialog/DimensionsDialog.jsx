@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './DimensionsDialog.module.css';
 import VanVisualization from '../VanVisualization/VanVisualization';
 
-function DimensionsDialog({ vehicle, onClose }) {
+function DimensionsDialog({ vehicle, selectedCargo, onClose }) {
   const [cargoLength, setCargoLength] = useState(vehicle.cargo_box.length / 2);
   const [cargoWidth, setCargoWidth] = useState(vehicle.cargo_box.width / 2);
   const [cargoHeight, setCargoHeight] = useState(vehicle.cargo_box.height / 2);
@@ -107,6 +107,25 @@ function DimensionsDialog({ vehicle, onClose }) {
               </div>
             </div>
           </div>
+
+          {selectedCargo && selectedCargo.length > 0 && (
+            <div className={styles.cargoList}>
+              <h3 className={styles.subtitle}>Wybrane ładunki</h3>
+              <ul className={styles.list}>
+                {selectedCargo.map((cargo, index) => (
+                  <li key={index} className={styles.cargoItem}>
+                    <div className={styles.cargoInfo}>
+                      <span className={styles.cargoName}>{cargo.name}</span>
+                      <span className={styles.cargoQuantity}>× {cargo.quantity}</span>
+                    </div>
+                    <div className={styles.cargoDimensions}>
+                      {cargo.dimensions.length}×{cargo.dimensions.width}×{cargo.dimensions.height} mm
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
