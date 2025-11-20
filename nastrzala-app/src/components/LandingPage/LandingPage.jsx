@@ -39,7 +39,7 @@ function LandingPage() {
           Prosta aplikacja webowa, która w 20 sekund odpowiada na pytanie:
         </p>
         <div className={styles.questions}>
-          <p className={styles.question}>„Czy to wejdzie do busa?"</p>
+          <p className={styles.question}>Czy to wejdzie do busa?</p>
         </div>
       </header>
 

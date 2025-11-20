@@ -18,7 +18,7 @@ function VanSelector({ onSelect }) {
   return (
     <div className={styles.container}>
       <label htmlFor="van-select" className={styles.label}>
-        Wybierz bus
+        Wybierz busa
       </label>
       <select
         id="van-select"
