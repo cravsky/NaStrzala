@@ -36,7 +36,7 @@ function LandingPage() {
       <header className={styles.header}>
         <h1 className={styles.title}>NaStrzala.com</h1>
         <p className={styles.tagline}>
-          Prosta aplikacja webowa, która w 20 sekund odpowiada na pytanie:
+          Aplikacja, która w 20 sekund odpowiada na pytanie:
         </p>
         <div className={styles.questions}>
           <p className={styles.question}>Czy to wejdzie do busa?</p>

@@ -1,7 +1,7 @@
 # NaStrzala.com — One-Pager
 
 ## Co to?
-Prosta aplikacja webowa, która w 20 sekund odpowiada na pytanie:
+Aplikacja, która w 20 sekund odpowiada na pytanie:
 **„Czy to wejdzie do busa?”**  
 
 ## Dla kogo?
