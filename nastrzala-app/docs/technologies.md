@@ -4,7 +4,7 @@
 
 ### React
 - **Purpose**: UI library for building user interfaces
-- **Language**: Pure JavaScript (no TypeScript)
+- **Language**: TypeScript
 - **Key Features**:
   - Component-based architecture
   - Virtual DOM for efficient rendering
@@ -27,7 +27,7 @@
   - Non-blocking, event-driven architecture
   - NPM ecosystem for package management
   - Efficient handling of concurrent requests
-  - JavaScript on both frontend and backend
+  - TypeScript on both frontend and backend
 
 ## Data Transfer
 
@@ -44,14 +44,14 @@
 ```
 Frontend (React)     ←→     Backend (Node.js)
    ↓                            ↓
-CSS Modules              JSON Data Transfer
+CSS Modules               JSON Data Transfer
    ↓                            ↓
-Pure JavaScript          Pure JavaScript
+TypeScript                   TypeScript
 ```
 
 ## Development Stack
 
-- **Language**: JavaScript (ES6+)
+- **Language**: TypeScript (ES6+)
 - **Frontend Framework**: React
 - **Backend Runtime**: Node.js
 - **Styling**: CSS Modules

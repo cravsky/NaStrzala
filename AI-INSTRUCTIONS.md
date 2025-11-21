@@ -4,7 +4,7 @@
 This is a van cargo fitting application that helps users determine if their cargo will fit in various delivery vans. The application uses React for the frontend and Node.js for the backend.
 
 ## Technology Stack
-- **Frontend**: React with pure JavaScript (no TypeScript)
+- **Frontend**: React with TypeScript
 - **Backend**: Node.js
 - **Styling**: CSS Modules for clear separation between JSX and style files
 - **Data Transfer**: JSON format
