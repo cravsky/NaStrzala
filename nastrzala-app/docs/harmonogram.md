@@ -1,133 +1,156 @@
-# Harmonogram prac nad MVP NaStrzala.com (10h/tydzień)
+# Harmonogram prac nad MVP NaStrzala.com — wersja skorygowana (realistyczna)
 
-## 🎯 Zakres MVP
-1. Landing page  
-2. Wybór z 3 predefiniowanych busów  
-3. Wybór z 10 predefiniowanych ładunków  
-4. Solver rozmieszczenia ładunku  
-5. Wizualizacja rozmieszczenia w rzucie izometrycznym (pasywna kamera)
+## Tydzień 1 — Fundamenty projektu (10h)
+### Setup techniczny
+- Inicjalizacja repo (GitHub)
+- Struktura projektu: frontend/, backend/
+- Konfiguracja dwóch dev-serverów + podstawowy routing
 
----
+### UI wstępne
+- Landing page (prosty szkic)
+- Preselekcja busa (dropdown + mock dane)
+- Preselekcja ładunków (lista + ilość sztuk)
 
-# 📅 Harmonogram — 8 tygodni (80 godzin)
+### Backend szkic
+- Mock endpoint `/solve` zwracający statyczne dane
 
-## Tydzień 1 – Podstawy projektu (10h)
-### Frontend
-- Utworzenie projektu React + struktury komponentów  
-- Routing (landing → app)  
-- Przygotowanie layoutu aplikacji  
-
-### UX / Specyfikacja
-- Flow MVP: wybór busa → wybór ładunków → solver → widok 3D  
-- Definiowanie danych 3 busów (preset JSON)
-
-### Backend
-- Projekt Node.js  
-- Wstępna struktura endpointów (`/solve`, `/presets`)
+**Cel tygodnia:** działająca lokalnie ścieżka: wybór busa/ładunku → request do solvera (mock).
 
 ---
 
-## Tydzień 2 – Landing page + Presety busów (10h)
-### Landing page (3–4h)
-- sekcje: co to, dla kogo, demo, CTA
+## Tydzień 2 — Przepływ danych + pierwsza wizualizacja 3D (10h)
+### Integracja danych
+- Format solver input (JSON)
+- Transformacja danych z UI do formatu solvera
+- Obsługa błędów / fallbacków
 
-### Presety busów (6h)
-- Sprinter L2H2  
-- Master L2H2  
-- Ducato L2H2  
-- Struktura danych (bounding boxy)  
-- UI wyboru busa
+### Wizualizacja 3D (iteracja 1 — techniczna)
+- Three.js setup
+- Pasywna kamera izometryczna
+- Renderowanie busa i ładunków jako boxów (mock XYZ)
 
----
+### UX
+- Prezentacja danych solvera (tekst + tabela + 3D)
 
-## Tydzień 3 – Presety ładunków (10h)
-### 10 presetów ładunków
-- płyty GK 120×200  
-- płyty GK 120×260  
-- płyty OSB  
-- płyty meblowe  
-- rury 3m  
-- rury 4m  
-- rury 6m  
-- listwy  
-- drzwi + ościeżnice  
-- okna
-
-### Zadania
-- JSON każdego presetowego ładunku  
-- Komponent wyboru ładunków  
-- Walidacja ilości sztuk
+**Cel tygodnia:** pełna ścieżka lokalna: user → solver (mock) → widok 3D.
 
 ---
 
-## Tydzień 4 – Integracja presetów + logika frontu (10h)
-- UI: podsumowanie wyboru  
-- Normalizacja danych wejściowych do solvera  
-- Konwersja ładunków na prostopadłościany  
-- Przekazywanie danych do backendu
+## Tydzień 3 — Solver: fundamenty algorytmiczne (10h)
+### Solver — iteracja 1
+- Przygotowanie struktury danych AABB (boxy)
+- Rotacje 0°/90°
+- Sortowanie od największych
+- Pierwsza heurystyka „layer packing”
+- Kolizje AABB z podstawową detekcją
+- Zwracanie listy pozycji XYZ
+
+### Presety busów — iteracja 1
+- Wymiary 3 busów (bez nadkoli)
+- Walidacja wymiarów pod solver
+
+**Cel tygodnia:** backend liczy proste przypadki i zwraca realne dane XYZ.
 
 ---
 
-## Tydzień 5 – Solver (10h)
-### Minimalna heurystyka
-- układanie od największych elementów  
-- rotacje 0°/90°  
-- stacking warstwami  
-- sprawdzanie kolizji bounding boxów  
-- ocena „mieści / nie mieści”
+## Tydzień 4 — Solver: heurystyki, edge-case’y, kursy (10h)
+### Solver — iteracja 2
+- Druga heurystyka (osiowe upakowanie)
+- Obsługa braku miejsca → liczba kursów
+- Poprawiona detekcja kolizji
+- Raportowanie „dlaczego nie weszło”
 
-### Backend
-- endpoint `/solve`  
-- zwracanie pozycji XYZ, rotacji oraz komunikatu tekstowego
+### Wizualizacja — iteracja 2
+- Realne dane XYZ z solvera
+- Lepsze kolory / rozróżnienie elementów
+- Usprawnienie kamery
 
----
+### Presety ładunków — iteracja 1
+- 10 typowych ładunków z wymiarami
+- Wstępna walidacja kompatybilności z solverem
 
-## Tydzień 6 – Wizualizacja 3D (10h)
-### Technicznie
-- Three.js  
-- Kamera izometryczna (fixed)  
-- Prosty model busa (box)  
-- Rysowanie ładunków jako kolorowane boxy
-
-### Funkcje
-- stały widok 35° × 45°  
-- legenda kolorów  
+**Cel tygodnia:** solver obsługuje większość realnych przypadków.
 
 ---
 
-## Tydzień 7 – Finalizacja (10h)
-- pełna integracja solvera z wizualizacją  
-- komunikaty: „wejdzie / nie wejdzie”  
-- UI podsumowania  
-- stabilizacja solvera  
-- poprawki UX
+## Tydzień 5 — Iteracja jakościowa: solver + presety + wizualizacja (10h)
+### Solver — iteracja 3
+- Korekty umiejscowienia boxów (dokładniejsze XY)
+- Stabilizacja heurystyk
+- Uspójnienie raportów tekstowych
+
+### Wizualizacja — iteracja 3
+- Modele bardziej czytelne
+- Wyświetlanie wymiarów
+- Czytelniejszy grid
+
+### Presety — iteracja 2
+- Dodanie nadkoli do busów (proste boxy)
+- Poprawa presetów ładunków
+
+**Cel tygodnia:** Aplikacja działa lokalnie w 100%, z sensownymi wynikami.
 
 ---
 
-## Tydzień 8 – Deploy + testy + dopracowanie landing page (10h)
-### Testy
-- presety busów  
-- presety ładunków  
-- przypadki krańcowe solvera  
+## Tydzień 6 — Deploy: hosting, Railway, domena (10h)
+### Backend → Railway
+- Deploy API solvera
+- Konfiguracja środowisk (DEV/PROD)
+- Logi i monitoring
 
-### Deploy
-- Backend: Railway  
-- Frontend: Netlify / Vercel  
-- Podpięcie domeny NaStrzala.com
+### Frontend → Vercel / Netlify
+- Build produkcyjny
+- Zmiana endpointów na produkcyjne
 
-### Marketing
-- dodanie gifa prezentującego działanie  
-- CTA „wypróbuj teraz”
+### Domena
+- Podpięcie NaStrzala.com
+- Certyfikaty HTTPS
+
+### Testy po-deploy
+- CORS
+- Czas odpowiedzi solvera
+- Podstawowe sanity testy
+
+**Cel tygodnia:** produkcja stoi i działa.
 
 ---
 
-# 🧱 Buffer (opcjonalne +10–20h)
-- poprawki solvera  
-- lepsza wizualizacja 3D  
-- uzupełnienie mikrointerakcji
+## Tydzień 7 — Optymalizacja, UX, presety (10h)
+### UX / UI polish
+- poprawa landing page
+- tooltipy, instrukcje, error states
+
+### Solver — iteracja 4
+- Poprawa wydajności
+- Lepsza obsługa paczek długich (rury 4–6m)
+- Edge-case'y małych busów
+
+### Wizualizacja — iteracja 4
+- Uspójnienie kolorystyki
+- Skalowanie sceny
+- Poprawa izometrii
+
+### Presety — iteracja 3
+- korekta wymiarów busów i ładunków
 
 ---
 
-# Podsumowanie
-**Łącznie: 80h (8 tygodni × 10h)**  
-Plan zapewnia pełne MVP: landing, wybór busów i ładunków, solver oraz izometryczną wizualizację 3D.
+## Tydzień 8 — Stabilizacja, testy końcowe, mikro-poprawki (10h)
+### Testy regresji
+- ~20 scenariuszy załadunkowych
+- płyty × 20, rury × 6m, drzwi, okna, mix
+
+### Stabilizacja solvera
+- redukcja „fluktuacji pozycji”
+- uproszczenie heurystyk tam gdzie możliwe
+
+### Poprawki techniczne
+- błędy graniczne API
+- fallback gdy solver zwraca pusty wynik
+- poprawa czasu obliczeń
+
+### Final polish
+- optymalizacja bundla
+- czyszczenie repo + README z instrukcją lokalną
+
+**Cel tygodnia:** stabilne MVP gotowe do użytku publicznego.
