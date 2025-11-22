@@ -4,9 +4,9 @@ import * as THREE from 'three';
 export default function VanModel({ vehicle, cargoLength, cargoWidth, cargoHeight }) {
   const cargoBoxRef = useRef();
 
-  const internalLength = vehicle.cargo_box.length / 1000;
-  const internalWidth = vehicle.cargo_box.width / 1000;
-  const internalHeight = vehicle.cargo_box.height / 1000;
+  const internalLength = vehicle.cargo_space.length / 1000;
+  const internalWidth = vehicle.cargo_space.width / 1000;
+  const internalHeight = vehicle.cargo_space.height / 1000;
 
   const boxLength = cargoLength / 1000;
   const boxWidth = cargoWidth / 1000;
@@ -16,9 +16,9 @@ export default function VanModel({ vehicle, cargoLength, cargoWidth, cargoHeight
   const floorHeight = 0.1;
 
   const doesFit =
-    cargoLength <= vehicle.cargo_box.length &&
-    cargoWidth <= vehicle.cargo_box.width &&
-    cargoHeight <= vehicle.cargo_box.height;
+    cargoLength <= vehicle.cargo_space.length &&
+    cargoWidth <= vehicle.cargo_space.width &&
+    cargoHeight <= vehicle.cargo_space.height;
 
   return (
     <group position={[0, 0, 0]}>

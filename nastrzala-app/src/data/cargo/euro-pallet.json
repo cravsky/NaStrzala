@@ -1,16 +1,15 @@
 {
-  "id": "euro_pallet",
-  "name": "Paleta EUR",
-  "description": "Standardowa paleta europejska (EPAL)",
+  "cargo_id": "euro_pallet",
+  "label": "Paleta EUR",
   "unit": "mm",
   "dimensions": {
     "length": 1200,
     "width": 800,
     "height": 144
   },
-  "typical_load_height": 1500,
   "weight_kg": 20,
-  "category": "pallet",
-  "stackable": true,
-  "rotation_allowed": false
+  "constraints": {
+    "stackable": true,
+    "allowed_orientations": [0, 2]
+  }
 }

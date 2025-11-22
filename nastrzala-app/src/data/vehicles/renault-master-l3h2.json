@@ -1,44 +1,25 @@
 {
-  "id": "master_l3h2",
+  "vehicle_id": "master_l3h2",
   "brand": "Renault",
   "model": "Master",
   "variant": "L3H2",
   "unit": "mm",
-  "coordinate_system": {
-    "origin": "rear_left_floor_inside",
-    "axes": {
-      "x": "forward",
-      "y": "right",
-      "z": "up"
-    }
-  },
-  "cargo_box": {
+  "origin": "rear_left_floor_inside",
+  "cargo_space": {
     "length": 3730,
     "width": 1765,
     "height": 1890
   },
-  "wheelarches": [
+  "wheel_arches": [
     {
-      "side": "left",
-      "x_from_rear": 1700,
-      "y_from_left": 0,
-      "length": 360,
-      "width": 240,
-      "height": 250
+      "label": "left",
+      "position": [1700, 0, 0],
+      "size": [360, 240, 250]
     },
     {
-      "side": "right",
-      "x_from_rear": 1700,
-      "y_from_left": 1525,
-      "length": 360,
-      "width": 240,
-      "height": 250
+      "label": "right",
+      "position": [1700, 1525, 0],
+      "size": [360, 240, 250]
     }
-  ],
-  "rear_door": {
-    "width": 1580,
-    "height": 1820,
-    "threshold_height": 75
-  },
-  "notes": "Platforma wspólna z Opel Movano / Nissan NV400; wartości typowe dla L3H2."
+  ]
 }

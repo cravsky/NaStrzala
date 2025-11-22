@@ -1,7 +1,6 @@
 {
-  "id": "large_box",
-  "name": "Duże pudło",
-  "description": "Pudło kartonowe duże",
+  "cargo_id": "large_box",
+  "label": "Duże pudło",
   "unit": "mm",
   "dimensions": {
     "length": 600,
@@ -9,7 +8,7 @@
     "height": 400
   },
   "weight_kg": 15,
-  "category": "box",
-  "stackable": true,
-  "rotation_allowed": true
+  "constraints": {
+    "stackable": true
+  }
 }

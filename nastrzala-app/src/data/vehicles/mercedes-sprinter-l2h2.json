@@ -1,44 +1,25 @@
 {
-  "id": "sprinter_l2h2",
+  "vehicle_id": "sprinter_l2h2",
   "brand": "Mercedes-Benz",
   "model": "Sprinter",
   "variant": "L2H2",
   "unit": "mm",
-  "coordinate_system": {
-    "origin": "rear_left_floor_inside",
-    "axes": {
-      "x": "forward",
-      "y": "right",
-      "z": "up"
-    }
-  },
-  "cargo_box": {
+  "origin": "rear_left_floor_inside",
+  "cargo_space": {
     "length": 3270,
     "width": 1780,
     "height": 1940
   },
-  "wheelarches": [
+  "wheel_arches": [
     {
-      "side": "left",
-      "x_from_rear": 1600,
-      "y_from_left": 0,
-      "length": 350,
-      "width": 230,
-      "height": 250
+      "label": "left",
+      "position": [1600, 0, 0],
+      "size": [350, 230, 250]
     },
     {
-      "side": "right",
-      "x_from_rear": 1600,
-      "y_from_left": 1550,
-      "length": 350,
-      "width": 230,
-      "height": 250
+      "label": "right",
+      "position": [1600, 1550, 0],
+      "size": [350, 230, 250]
     }
-  ],
-  "rear_door": {
-    "width": 1560,
-    "height": 1850,
-    "threshold_height": 70
-  },
-  "notes": "Wymiary zaokrąglone; dopuszczalny błąd rzędu kilku mm nie ma znaczenia dla decyzji wejdzie/nie_wejdzie."
+  ]
 }

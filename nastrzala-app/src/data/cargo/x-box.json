@@ -1,7 +1,6 @@
 {
-  "id": "x-box",
-  "name": "Duże pudło",
-  "description": "Pudło kartonowe duże",
+  "cargo_id": "x-box",
+  "label": "Duże pudło X",
   "unit": "mm",
   "dimensions": {
     "length": 650,
@@ -9,7 +8,7 @@
     "height": 260
   },
   "weight_kg": 18,
-  "category": "box",
-  "stackable": true,
-  "rotation_allowed": true
+  "constraints": {
+    "stackable": true
+  }
 }

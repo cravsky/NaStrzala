@@ -1,7 +1,6 @@
 {
-  "id": "medium_box",
-  "name": "Średnie pudło",
-  "description": "Pudo kartonowe średnie",
+  "cargo_id": "medium_box",
+  "label": "Średnie pudło",
   "unit": "mm",
   "dimensions": {
     "length": 400,
@@ -9,7 +8,7 @@
     "height": 300
   },
   "weight_kg": 8,
-  "category": "box",
-  "stackable": true,
-  "rotation_allowed": true
+  "constraints": {
+    "stackable": true
+  }
 }

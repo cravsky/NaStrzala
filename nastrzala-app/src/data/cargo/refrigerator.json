@@ -1,7 +1,6 @@
 {
-  "id": "refrigerator",
-  "name": "Lodówka",
-  "description": "Standardowa lodówka wolnostojca",
+  "cargo_id": "refrigerator",
+  "label": "Lodówka",
   "unit": "mm",
   "dimensions": {
     "length": 600,
@@ -9,7 +8,9 @@
     "height": 1850
   },
   "weight_kg": 80,
-  "category": "appliance",
-  "stackable": false,
-  "rotation_allowed": false
+  "constraints": {
+    "stackable": false,
+    "allowed_orientations": [0],
+    "require_bottom_face_down": true
+  }
 }

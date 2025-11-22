@@ -33,15 +33,15 @@ function DimensionsDialog({ vehicle, selectedCargo, onClose }) {
               <div className={styles.dimensions}>
                 <div className={styles.dimension}>
                   <span className={styles.label}>Długość:</span>
-                  <span className={styles.value}>{vehicle.cargo_box.length} mm</span>
+                  <span className={styles.value}>{vehicle.cargo_space.length} mm</span>
                 </div>
                 <div className={styles.dimension}>
                   <span className={styles.label}>Szerokość:</span>
-                  <span className={styles.value}>{vehicle.cargo_box.width} mm</span>
+                  <span className={styles.value}>{vehicle.cargo_space.width} mm</span>
                 </div>
                 <div className={styles.dimension}>
                   <span className={styles.label}>Wysokość:</span>
-                  <span className={styles.value}>{vehicle.cargo_box.height} mm</span>
+                  <span className={styles.value}>{vehicle.cargo_space.height} mm</span>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@ function DimensionsDialog({ vehicle, selectedCargo, onClose }) {
                   {selectedCargo.map((cargo, index) => (
                     <li key={index} className={styles.cargoItem}>
                       <div className={styles.cargoInfo}>
-                        <span className={styles.cargoName}>{cargo.name}</span>
+                        <span className={styles.cargoName}>{cargo.label}</span>
                         <span className={styles.cargoQuantity}>× {cargo.quantity}</span>
                       </div>
                       <div className={styles.cargoDimensions}>

@@ -9,7 +9,7 @@ function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
   const handleAddCargo = () => {
     if (!selectedCargoType) return;
 
-    const cargoType = cargoTypes.find(c => c.id === selectedCargoType);
+    const cargoType = cargoTypes.find(c => c.cargo_id === selectedCargoType);
     if (cargoType) {
       onCargoSelected({
         ...cargoType,
@@ -34,8 +34,8 @@ function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
           >
             <option value="">-- Wybierz typ --</option>
             {cargoTypes.map((cargo) => (
-              <option key={cargo.id} value={cargo.id}>
-                {cargo.name} ({cargo.dimensions.length}×{cargo.dimensions.width}×{cargo.dimensions.height} mm)
+              <option key={cargo.cargo_id} value={cargo.cargo_id}>
+                {cargo.label} ({cargo.dimensions.length}×{cargo.dimensions.width}×{cargo.dimensions.height} mm)
               </option>
             ))}
           </select>
@@ -68,7 +68,7 @@ function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
           <ul className={styles.list}>
             {selectedCargo.map((item, index) => (
               <li key={index} className={styles.listItem}>
-                <span className={styles.itemName}>{item.name}</span>
+                <span className={styles.itemName}>{item.label}</span>
                 <span className={styles.itemQuantity}>× {item.quantity}</span>
                 <span className={styles.itemDimensions}>
                   ({item.dimensions.length}×{item.dimensions.width}×{item.dimensions.height} mm)
