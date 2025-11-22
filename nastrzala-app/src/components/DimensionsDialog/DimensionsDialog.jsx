@@ -8,6 +8,14 @@ function DimensionsDialog({ vehicle, selectedCargo, onClose }) {
     }
   };
 
+  // Calculate aggregate cargo dimensions (simple sum for now)
+  const totalCargoLength = selectedCargo?.reduce((sum, cargo) => 
+    sum + (cargo.dimensions?.length || 0) * (cargo.quantity || 1), 0) || 0;
+  const maxCargoWidth = selectedCargo?.reduce((max, cargo) => 
+    Math.max(max, cargo.dimensions?.width || 0), 0) || 0;
+  const maxCargoHeight = selectedCargo?.reduce((max, cargo) => 
+    Math.max(max, cargo.dimensions?.height || 0), 0) || 0;
+
   return (
     <div className={styles.backdrop} onClick={handleBackdropClick}>
       <div className={styles.dialog}>
@@ -24,7 +32,12 @@ function DimensionsDialog({ vehicle, selectedCargo, onClose }) {
 
         <div className={styles.content}>
           <div className={styles.visualizationContainer}>
-            <VanVisualization vehicle={vehicle} selectedCargo={selectedCargo} />
+            <VanVisualization 
+              vehicle={vehicle} 
+              cargoLength={totalCargoLength}
+              cargoWidth={maxCargoWidth}
+              cargoHeight={maxCargoHeight}
+            />
           </div>
 
           <div className={styles.infoPanel}>
@@ -33,15 +46,15 @@ function DimensionsDialog({ vehicle, selectedCargo, onClose }) {
               <div className={styles.dimensions}>
                 <div className={styles.dimension}>
                   <span className={styles.label}>Długość:</span>
-                  <span className={styles.value}>{vehicle.cargo_space.length} mm</span>
+                  <span className={styles.value}>{vehicle.cargo_space?.length || 0} mm</span>
                 </div>
                 <div className={styles.dimension}>
                   <span className={styles.label}>Szerokość:</span>
-                  <span className={styles.value}>{vehicle.cargo_space.width} mm</span>
+                  <span className={styles.value}>{vehicle.cargo_space?.width || 0} mm</span>
                 </div>
                 <div className={styles.dimension}>
                   <span className={styles.label}>Wysokość:</span>
-                  <span className={styles.value}>{vehicle.cargo_space.height} mm</span>
+                  <span className={styles.value}>{vehicle.cargo_space?.height || 0} mm</span>
                 </div>
               </div>
             </div>

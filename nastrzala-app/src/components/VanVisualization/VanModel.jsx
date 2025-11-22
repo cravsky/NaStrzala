@@ -4,21 +4,23 @@ import * as THREE from 'three';
 export default function VanModel({ vehicle, cargoLength, cargoWidth, cargoHeight }) {
   const cargoBoxRef = useRef();
 
-  const internalLength = vehicle.cargo_space.length / 1000;
-  const internalWidth = vehicle.cargo_space.width / 1000;
-  const internalHeight = vehicle.cargo_space.height / 1000;
+  const internalLength = vehicle.cargo_space?.length / 1000 || 3;
+  const internalWidth = vehicle.cargo_space?.width / 1000 || 1.8;
+  const internalHeight = vehicle.cargo_space?.height / 1000 || 1.9;
 
-  const boxLength = cargoLength / 1000;
-  const boxWidth = cargoWidth / 1000;
-  const boxHeight = cargoHeight / 1000;
+  const boxLength = Math.max(cargoLength / 1000, 0.01);
+  const boxWidth = Math.max(cargoWidth / 1000, 0.01);
+  const boxHeight = Math.max(cargoHeight / 1000, 0.01);
 
   const vanWallThickness = 0.05;
   const floorHeight = 0.1;
 
   const doesFit =
-    cargoLength <= vehicle.cargo_space.length &&
-    cargoWidth <= vehicle.cargo_space.width &&
-    cargoHeight <= vehicle.cargo_space.height;
+    cargoLength <= (vehicle.cargo_space?.length || 0) &&
+    cargoWidth <= (vehicle.cargo_space?.width || 0) &&
+    cargoHeight <= (vehicle.cargo_space?.height || 0);
+
+  const hasCargo = cargoLength > 0 && cargoWidth > 0 && cargoHeight > 0;
 
   return (
     <group position={[0, 0, 0]}>
@@ -53,23 +55,27 @@ export default function VanModel({ vehicle, cargoLength, cargoWidth, cargoHeight
           <meshStandardMaterial color="#718096" transparent opacity={0.3} />
         </mesh>
 
-        <mesh
-          ref={cargoBoxRef}
-          position={[0, (boxHeight + floorHeight) / 2, 0]}
-          castShadow
-        >
-          <boxGeometry args={[boxLength, boxHeight, boxWidth]} />
-          <meshStandardMaterial
-            color={doesFit ? "#48bb78" : "#f56565"}
-            transparent
-            opacity={0.7}
-          />
-        </mesh>
+        {hasCargo && (
+          <>
+            <mesh
+              ref={cargoBoxRef}
+              position={[0, (boxHeight + floorHeight) / 2, 0]}
+              castShadow
+            >
+              <boxGeometry args={[boxLength, boxHeight, boxWidth]} />
+              <meshStandardMaterial
+                color={doesFit ? "#48bb78" : "#f56565"}
+                transparent
+                opacity={0.7}
+              />
+            </mesh>
 
-        <lineSegments position={[0, (boxHeight + floorHeight) / 2, 0]}>
-          <edgesGeometry args={[new THREE.BoxGeometry(boxLength, boxHeight, boxWidth)]} />
-          <lineBasicMaterial color={doesFit ? "#2f855a" : "#c53030"} />
-        </lineSegments>
+            <lineSegments position={[0, (boxHeight + floorHeight) / 2, 0]}>
+              <edgesGeometry args={[new THREE.BoxGeometry(boxLength, boxHeight, boxWidth)]} />
+              <lineBasicMaterial color={doesFit ? "#2f855a" : "#c53030"} />
+            </lineSegments>
+          </>
+        )}
       </group>
 
       <mesh receiveShadow position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
