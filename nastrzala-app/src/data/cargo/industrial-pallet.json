@@ -10,5 +10,7 @@
   },
   "typical_load_height": 1500,
   "weight_kg": 25,
-  "category": "pallet"
+  "category": "pallet",
+  "stackable": true,
+  "rotation_allowed": false
 }
