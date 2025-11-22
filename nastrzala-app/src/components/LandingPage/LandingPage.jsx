@@ -3,11 +3,15 @@ import styles from './LandingPage.module.css';
 import VanSelector from '../VanSelector/VanSelector';
 import CargoSelector from '../CargoSelector/CargoSelector';
 import DimensionsDialog from '../DimensionsDialog/DimensionsDialog';
+import { solve } from '../../solvers/solver';
+import { cargoTypes } from '../../data/cargo';
+import { vehicles } from '../../data/vehicles';
 
 function LandingPage() {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [selectedCargo, setSelectedCargo] = useState([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [solverResult, setSolverResult] = useState(null);
 
   const handleVehicleSelect = (vehicle) => {
     setSelectedVehicle(vehicle);
@@ -22,7 +26,42 @@ function LandingPage() {
   };
 
   const handleOpenDialog = () => {
-    if (selectedVehicle) {
+    if (selectedVehicle && selectedCargo.length > 0) {
+      // Prepare solver context
+      const vehiclesMap = {};
+      vehicles.forEach(v => {
+        vehiclesMap[v.vehicle_id] = v;
+      });
+      
+      const cargoMap = {};
+      cargoTypes.forEach(c => {
+        cargoMap[c.cargo_id] = c;
+      });
+      
+      const context = {
+        vehicles: vehiclesMap,
+        cargo: cargoMap
+      };
+      
+      // Prepare solver request
+      const cargoItems = selectedCargo.map(cargo => ({
+        cargo_id: cargo.cargo_id,
+        quantity: cargo.quantity
+      }));
+      
+      const request = {
+        vehicle_id: selectedVehicle.vehicle_id,
+        unit: 'mm',
+        cargo_items: cargoItems,
+        options: {
+          max_trips: 1
+        }
+      };
+      
+      // Run solver
+      const result = solve(request, context);
+      setSolverResult(result);
+      
       setIsDialogOpen(true);
     }
   };
@@ -78,6 +117,7 @@ function LandingPage() {
         <DimensionsDialog
           vehicle={selectedVehicle}
           selectedCargo={selectedCargo}
+          solverResult={solverResult}
           onClose={handleCloseDialog}
         />
       )}

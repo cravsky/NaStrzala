@@ -3,7 +3,7 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import VanModel from './VanModel';
 import styles from './VanVisualization.module.css';
 
-export default function VanVisualization({ vehicle, cargoLength, cargoWidth, cargoHeight }) {
+export default function VanVisualization({ vehicle, placements, cargoLength, cargoWidth, cargoHeight }) {
   return (
     <div className={styles.container}>
       <Canvas shadows>
@@ -28,6 +28,7 @@ export default function VanVisualization({ vehicle, cargoLength, cargoWidth, car
 
         <VanModel
           vehicle={vehicle}
+          placements={placements}
           cargoLength={cargoLength}
           cargoWidth={cargoWidth}
           cargoHeight={cargoHeight}

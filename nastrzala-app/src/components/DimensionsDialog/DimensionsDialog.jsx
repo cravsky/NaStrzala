@@ -1,12 +1,15 @@
 import styles from './DimensionsDialog.module.css';
 import VanVisualization from '../VanVisualization/VanVisualization';
 
-function DimensionsDialog({ vehicle, selectedCargo, onClose }) {
+function DimensionsDialog({ vehicle, selectedCargo, solverResult, onClose }) {
   const handleBackdropClick = (event) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
   };
+
+  // Extract placements from solver result
+  const placements = solverResult?.trips?.[0]?.items || [];
 
   // Calculate aggregate cargo dimensions (simple sum for now)
   const totalCargoLength = selectedCargo?.reduce((sum, cargo) => 
@@ -34,6 +37,7 @@ function DimensionsDialog({ vehicle, selectedCargo, onClose }) {
           <div className={styles.visualizationContainer}>
             <VanVisualization 
               vehicle={vehicle} 
+              placements={placements}
               cargoLength={totalCargoLength}
               cargoWidth={maxCargoWidth}
               cargoHeight={maxCargoHeight}
