@@ -23,7 +23,7 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
   const hasCargo = cargoLength > 0 && cargoWidth > 0 && cargoHeight > 0;
   const hasPlacedItems = placements && placements.length > 0;
   
-  // Color palette for different cargo types
+  // Color palette for different cargo types - more colors for better distinction
   const cargoColors = [
     '#48bb78', // green
     '#4299e1', // blue
@@ -32,113 +32,147 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
     '#f56565', // red
     '#38b2ac', // teal
     '#ecc94b', // yellow
+    '#e91e63', // pink
+    '#00bcd4', // cyan
+    '#8bc34a', // lime
+    '#ff9800', // deep orange
+    '#673ab7', // deep purple
   ];
   
+  // Track which cargo IDs we've seen and assign colors sequentially
+  const cargoIdColorMap = {};
+  let colorIndex = 0;
+  
   const getCargoColor = (cargoId) => {
-    // Simple hash function to assign consistent colors
-    let hash = 0;
-    for (let i = 0; i < cargoId.length; i++) {
-      hash = cargoId.charCodeAt(i) + ((hash << 5) - hash);
+    if (!cargoIdColorMap[cargoId]) {
+      cargoIdColorMap[cargoId] = cargoColors[colorIndex % cargoColors.length];
+      colorIndex++;
     }
-    return cargoColors[Math.abs(hash) % cargoColors.length];
+    return cargoIdColorMap[cargoId];
   };
 
   return (
     <group position={[0, 0, 0]}>
-      <group position={[0, (internalHeight + floorHeight) / 2, 0]}>
-        <mesh position={[0, 0, 0]} castShadow>
-          <boxGeometry args={[internalLength, floorHeight, internalWidth]} />
-          <meshStandardMaterial color="#4a5568" />
-        </mesh>
+      {/* Floor at Y = floorHeight/2 */}
+      <mesh position={[0, floorHeight / 2, 0]} castShadow>
+        <boxGeometry args={[internalLength, floorHeight, internalWidth]} />
+        <meshStandardMaterial color="#4a5568" />
+      </mesh>
 
-        <mesh position={[-(internalLength + vanWallThickness) / 2, internalHeight / 2, 0]} castShadow>
-          <boxGeometry args={[vanWallThickness, internalHeight, internalWidth]} />
-          <meshStandardMaterial color="#718096" transparent opacity={0.3} />
-        </mesh>
+      {/* Left wall (negative X) */}
+      <mesh position={[-(internalLength + vanWallThickness) / 2, floorHeight + internalHeight / 2, 0]} castShadow>
+        <boxGeometry args={[vanWallThickness, internalHeight, internalWidth]} />
+        <meshStandardMaterial color="#718096" transparent opacity={0.3} />
+      </mesh>
 
-        <mesh position={[(internalLength + vanWallThickness) / 2, internalHeight / 2, 0]} castShadow>
-          <boxGeometry args={[vanWallThickness, internalHeight, internalWidth]} />
-          <meshStandardMaterial color="#718096" transparent opacity={0.3} />
-        </mesh>
+      {/* Right wall (positive X) */}
+      <mesh position={[(internalLength + vanWallThickness) / 2, floorHeight + internalHeight / 2, 0]} castShadow>
+        <boxGeometry args={[vanWallThickness, internalHeight, internalWidth]} />
+        <meshStandardMaterial color="#718096" transparent opacity={0.3} />
+      </mesh>
 
-        <mesh position={[0, internalHeight / 2, -(internalWidth + vanWallThickness) / 2]} castShadow>
-          <boxGeometry args={[internalLength, internalHeight, vanWallThickness]} />
-          <meshStandardMaterial color="#718096" transparent opacity={0.3} />
-        </mesh>
+      {/* Back wall (negative Z) */}
+      <mesh position={[0, floorHeight + internalHeight / 2, -(internalWidth + vanWallThickness) / 2]} castShadow>
+        <boxGeometry args={[internalLength, internalHeight, vanWallThickness]} />
+        <meshStandardMaterial color="#718096" transparent opacity={0.3} />
+      </mesh>
 
-        <mesh position={[0, internalHeight / 2, (internalWidth + vanWallThickness) / 2]} castShadow>
-          <boxGeometry args={[internalLength, internalHeight, vanWallThickness]} />
-          <meshStandardMaterial color="#718096" transparent opacity={0.3} />
-        </mesh>
+      {/* Front wall (positive Z) - doors/opening */}
+      <mesh position={[0, floorHeight + internalHeight / 2, (internalWidth + vanWallThickness) / 2]} castShadow>
+        <boxGeometry args={[internalLength, internalHeight, vanWallThickness]} />
+        <meshStandardMaterial color="#718096" transparent opacity={0.2} />
+      </mesh>
 
-        <mesh position={[0, (internalHeight + vanWallThickness) / 2, 0]} castShadow>
-          <boxGeometry args={[internalLength, vanWallThickness, internalWidth]} />
-          <meshStandardMaterial color="#718096" transparent opacity={0.3} />
-        </mesh>
+      {/* Ceiling - make it less visible */}
+      <mesh position={[0, floorHeight + internalHeight + vanWallThickness / 2, 0]} castShadow>
+        <boxGeometry args={[internalLength, vanWallThickness, internalWidth]} />
+        <meshStandardMaterial color="#718096" transparent opacity={0.15} />
+      </mesh>
 
-        {/* Render solver placements if available, otherwise show aggregate box */}
-        {hasPlacedItems ? (
-          placements.map((placement, index) => {
-            const [x, y, z] = placement.anchor;
-            const [dx, dy, dz] = placement.size;
-            
-            // Convert mm to meters
-            const posX = x / 1000;
-            const posY = y / 1000;
-            const posZ = z / 1000;
-            const sizeX = dx / 1000;
-            const sizeY = dy / 1000;
-            const sizeZ = dz / 1000;
-            
-            // Position cargo box at center of its volume (Three.js boxes are centered)
-            const centerX = posX + sizeX / 2 - internalLength / 2;
-            const centerY = posZ + sizeZ / 2 + floorHeight;
-            const centerZ = posY + sizeY / 2 - internalWidth / 2;
-            
-            const color = getCargoColor(placement.cargo_id);
-            
-            return (
-              <group key={index}>
-                <mesh
-                  position={[centerX, centerY, centerZ]}
-                  castShadow
-                >
-                  <boxGeometry args={[sizeX, sizeZ, sizeY]} />
-                  <meshStandardMaterial
-                    color={color}
-                    transparent
-                    opacity={0.7}
-                  />
-                </mesh>
-                <lineSegments position={[centerX, centerY, centerZ]}>
-                  <edgesGeometry args={[new THREE.BoxGeometry(sizeX, sizeZ, sizeY)]} />
-                  <lineBasicMaterial color="#2d3748" />
-                </lineSegments>
-              </group>
-            );
-          })
-        ) : hasCargo ? (
-          <>
-            <mesh
-              ref={cargoBoxRef}
-              position={[0, (boxHeight + floorHeight) / 2, 0]}
-              castShadow
-            >
+      {/* Render solver placements if available, otherwise show aggregate box */}
+      {hasPlacedItems ? (
+        placements.map((placement, index) => {
+          // Solver coordinates: anchor [x, y, z] where x=length, y=width, z=height
+          // Solver assumes z=0 is the floor top surface
+          const [solverX, solverY, solverZ] = placement.anchor;
+          const [solverDx, solverDy, solverDz] = placement.size;
+          
+          // Convert mm to meters
+          const posX = solverX / 1000;
+          const posY = solverY / 1000;
+          const posZ = solverZ / 1000;
+          const sizeX = solverDx / 1000;
+          const sizeY = solverDy / 1000;
+          const sizeZ = solverDz / 1000;
+          
+          // Add tiny visual gap (1mm) to make edges visible between touching boxes
+          const gap = 0.001;
+          const visualSizeX = sizeX - gap;
+          const visualSizeY = sizeY - gap;
+          const visualSizeZ = sizeZ - gap;
+          
+          // Three.js coordinate mapping:
+          // Solver X (length/forward) -> Three.js X
+          // Solver Y (width/right) -> Three.js Z
+          // Solver Z (height/up) -> Three.js Y
+          
+          // Center the box in Three.js space (boxes are rendered from center)
+          // Van origin is at center, so offset by half dimensions
+          const centerX = posX + sizeX / 2 - internalLength / 2;
+          const centerZ = posY + sizeY / 2 - internalWidth / 2;
+          
+          // For Y: solver z=0 is floor top at Y=floorHeight
+          // So cargo with bottom at solverZ should have center at:
+          const centerY = floorHeight + posZ + sizeZ / 2;
+          
+          const color = getCargoColor(placement.cargo_id);
+          
+          return (
+            <group key={`placement-${index}`}>
+              <mesh
+                position={[centerX, centerY, centerZ]}
+              >
+                <boxGeometry args={[visualSizeX, visualSizeZ, visualSizeY]} />
+                <meshStandardMaterial
+                  color={color}
+                  // transparent={true}
+                  opacity={0.75}
+                  polygonOffset={true}
+                  polygonOffsetFactor={1}
+                  polygonOffsetUnits={1}
+                />
+              </mesh>
+              <lineSegments position={[centerX, centerY, centerZ]}>
+                <edgesGeometry attach="geometry">
+                  <boxGeometry args={[visualSizeX, visualSizeZ, visualSizeY]} />
+                </edgesGeometry>
+                <lineBasicMaterial color="#000000" depthTest={true} />
+              </lineSegments>
+            </group>
+          );
+        })
+      ) : hasCargo && !hasPlacedItems ? (
+        <>
+          <mesh
+            ref={cargoBoxRef}
+            position={[0, floorHeight + boxHeight / 2, 0]}
+          >
+            <boxGeometry args={[boxLength, boxHeight, boxWidth]} />
+            <meshStandardMaterial
+              color={doesFit ? "#48bb78" : "#f56565"}
+              transparent
+              opacity={0.7}
+            />
+          </mesh>
+
+          <lineSegments position={[0, floorHeight + boxHeight / 2, 0]}>
+            <edgesGeometry>
               <boxGeometry args={[boxLength, boxHeight, boxWidth]} />
-              <meshStandardMaterial
-                color={doesFit ? "#48bb78" : "#f56565"}
-                transparent
-                opacity={0.7}
-              />
-            </mesh>
-
-            <lineSegments position={[0, (boxHeight + floorHeight) / 2, 0]}>
-              <edgesGeometry args={[new THREE.BoxGeometry(boxLength, boxHeight, boxWidth)]} />
-              <lineBasicMaterial color={doesFit ? "#2f855a" : "#c53030"} />
-            </lineSegments>
-          </>
-        ) : null}
-      </group>
+            </edgesGeometry>
+            <lineBasicMaterial color={doesFit ? "#2f855a" : "#c53030"} linewidth={2} />
+          </lineSegments>
+        </>
+      ) : null}
 
       <mesh receiveShadow position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[20, 20]} />
