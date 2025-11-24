@@ -8,8 +8,10 @@
     "height": 144
   },
   "weight_kg": 25,
-  "constraints": {
+  "flags": {
     "stackable": true,
-    "allowed_orientations": [0, 2]
+    "allowRotations": true,
+    "fragile": false,
+    "vertical": false
   }
 }

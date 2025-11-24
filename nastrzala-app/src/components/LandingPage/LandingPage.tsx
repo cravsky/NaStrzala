@@ -27,39 +27,21 @@ function LandingPage() {
 
   const handleOpenDialog = () => {
     if (selectedVehicle && selectedCargo.length > 0) {
-      // Prepare solver context
-      const vehiclesMap = {};
-      vehicles.forEach(v => {
-        vehiclesMap[v.vehicle_id] = v;
-      });
-      
-      const cargoMap = {};
-      cargoTypes.forEach(c => {
-        cargoMap[c.cargo_id] = c;
-      });
-      
-      const context = {
-        vehicles: vehiclesMap,
-        cargo: cargoMap
-      };
-      
-      // Prepare solver request
-      const cargoItems = selectedCargo.map(cargo => ({
-        cargo_id: cargo.cargo_id,
+      // Prepare solver request with new format
+      const items = selectedCargo.map(cargo => ({
+        definition: cargo, // Full CargoDefinition
         quantity: cargo.quantity
       }));
       
       const request = {
-        vehicle_id: selectedVehicle.vehicle_id,
         unit: 'mm',
-        cargo_items: cargoItems,
-        options: {
-          max_trips: 1
-        }
+        vehicle: selectedVehicle, // Full VehicleDefinition
+        items: items,
+        max_trips: 1
       };
       
       // Run solver
-      const result = solve(request, context);
+      const result = solve(request);
       setSolverResult(result);
       
       setIsDialogOpen(true);

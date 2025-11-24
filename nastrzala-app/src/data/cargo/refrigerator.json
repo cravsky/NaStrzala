@@ -7,10 +7,11 @@
     "width": 600,
     "height": 1850
   },
-  "weight_kg": 80,
-  "constraints": {
+  "weight_kg": 85,
+  "flags": {
     "stackable": false,
-    "allowed_orientations": [0],
-    "require_bottom_face_down": true
+    "allowRotations": false,
+    "fragile": true,
+    "vertical": true
   }
 }
