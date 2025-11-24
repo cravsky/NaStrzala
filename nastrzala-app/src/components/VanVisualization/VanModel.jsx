@@ -125,7 +125,9 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
           // So cargo with bottom at solverZ should have center at:
           const centerY = floorHeight + posZ + sizeZ / 2;
           
-          const color = getCargoColor(placement.cargo_id);
+          // Get cargo_id from the new placement structure (placement.piece.cargo_id)
+          const cargoId = placement.piece?.cargo_id || 'unknown';
+          const color = getCargoColor(cargoId);
           
           return (
             <group key={`placement-${index}`}>

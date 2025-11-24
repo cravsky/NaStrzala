@@ -10,7 +10,7 @@
   "weight_kg": 20,
   "flags": {
     "stackable": true,
-    "allowRotations": true,
+    "allowRotations": false,
     "fragile": false,
     "vertical": false
   }
