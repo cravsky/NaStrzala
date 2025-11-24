@@ -105,8 +105,8 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
           const sizeY = solverDy / 1000;
           const sizeZ = solverDz / 1000;
           
-          // Add tiny visual gap (1mm) to make edges visible between touching boxes
-          const gap = 0.001;
+          // Add visual gap (3mm) to make edges visible between touching boxes
+          const gap = 0.003;
           const visualSizeX = sizeX - gap;
           const visualSizeY = sizeY - gap;
           const visualSizeZ = sizeZ - gap;
@@ -135,8 +135,8 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
                 <boxGeometry args={[visualSizeX, visualSizeZ, visualSizeY]} />
                 <meshStandardMaterial
                   color={color}
-                  // transparent={true}
-                  opacity={0.75}
+                  transparent={true}
+                  opacity={0.85}
                   polygonOffset={true}
                   polygonOffsetFactor={1}
                   polygonOffsetUnits={1}
@@ -146,7 +146,7 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
                 <edgesGeometry attach="geometry">
                   <boxGeometry args={[visualSizeX, visualSizeZ, visualSizeY]} />
                 </edgesGeometry>
-                <lineBasicMaterial color="#000000" depthTest={true} />
+                <lineBasicMaterial color="#1a202c" depthTest={true} linewidth={2} />
               </lineSegments>
             </group>
           );
