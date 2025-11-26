@@ -1,0 +1,8 @@
+{
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "github.copilot.chat.chat.instructionsFilesLocations": [
+    ".github/copilot-instructions.md",
+    "nastrzala-app/docs/TESTING-SOLVER-MODULES.md",
+    "nastrzala-app/docs/solver-rules.md"
+  ]
+}
