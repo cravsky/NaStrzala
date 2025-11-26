@@ -28,11 +28,11 @@ export function solve(request: SolverRequest): SolverResponse {
 
   // STAGE 1: Expand cargo items into individual pieces with metadata
   const pieces = expandCargoItems(request.items);
-  if (DEBUG) logExpandedPieces(pieces);
+  if (!DEBUG) logExpandedPieces(pieces);
 
   // STAGE 2: Sort by packing priority (solver-rules §10)
   const sortedPieces = sortByPriority(pieces);
-  if (DEBUG) logSortedPieces(sortedPieces);
+  if (!DEBUG) logSortedPieces(sortedPieces);
 
   // STAGE 3: Initialize free space with obstacles carved out
   const initialSpace = initializeFreeSpace(vehicle);

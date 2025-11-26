@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import * as THREE from 'three';
 
-export default function VanModel({ vehicle, placements, cargoLength, cargoWidth, cargoHeight }) {
+export default function VanModel({ vehicle, placements, cargoLength, cargoWidth, cargoHeight, showObstacles = true }) {
   const cargoBoxRef = useRef();
 
   const internalLength = vehicle.cargo_space?.length / 1000 || 3;
@@ -88,6 +88,79 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
         <boxGeometry args={[internalLength, vanWallThickness, internalWidth]} />
         <meshStandardMaterial color="#718096" transparent opacity={0.15} />
       </mesh>
+
+      {/* Wheel arches / obstacles visualization */}
+      {showObstacles && Array.isArray(vehicle?.wheel_arches) && vehicle.wheel_arches.length > 0 && (
+        <group>
+          {vehicle.wheel_arches.map((arch, i) => {
+            const [ax, ay, az] = arch.position; // mm
+            const [sx, sy, sz] = arch.size; // mm
+            // Convert to meters
+            const axm = ax / 1000;
+            const aym = ay / 1000;
+            const azm = az / 1000;
+            const sxm = sx / 1000;
+            const sym = sy / 1000;
+            const szm = sz / 1000;
+
+            // Centered positions in Three.js space
+            const centerX = axm + sxm / 2 - internalLength / 2;
+            const centerZ = aym + sym / 2 - internalWidth / 2;
+            const centerY = floorHeight + azm + szm / 2;
+
+            return (
+              <group key={`arch-${i}`}>
+                <mesh position={[centerX, centerY, centerZ]}>
+                  <boxGeometry args={[sxm, szm, sym]} />
+                  <meshStandardMaterial color="#ef4444" transparent opacity={0.35} />
+                </mesh>
+                <lineSegments position={[centerX, centerY, centerZ]}>
+                  <edgesGeometry>
+                    <boxGeometry args={[sxm, szm, sym]} />
+                  </edgesGeometry>
+                  <lineBasicMaterial color="#b91c1c" />
+                </lineSegments>
+              </group>
+            );
+          })}
+        </group>
+      )}
+
+      {/* Additional vehicle obstacles visualization */}
+      {showObstacles && Array.isArray(vehicle?.obstacles) && vehicle.obstacles.length > 0 && (
+        <group>
+          {vehicle.obstacles.map((obs, i) => {
+            const [ox, oy, oz] = obs.position; // mm
+            const [osx, osy, osz] = obs.size; // mm
+
+            const oxm = ox / 1000;
+            const oym = oy / 1000;
+            const ozm = oz / 1000;
+            const osxm = osx / 1000;
+            const osym = osy / 1000;
+            const oszm = osz / 1000;
+
+            const centerX = oxm + osxm / 2 - internalLength / 2;
+            const centerZ = oym + osym / 2 - internalWidth / 2;
+            const centerY = floorHeight + ozm + oszm / 2;
+
+            return (
+              <group key={`obs-${i}`}>
+                <mesh position={[centerX, centerY, centerZ]}>
+                  <boxGeometry args={[osxm, oszm, osym]} />
+                  <meshStandardMaterial color="#ef4444" transparent opacity={0.35} />
+                </mesh>
+                <lineSegments position={[centerX, centerY, centerZ]}>
+                  <edgesGeometry>
+                    <boxGeometry args={[osxm, oszm, osym]} />
+                  </edgesGeometry>
+                  <lineBasicMaterial color="#b91c1c" />
+                </lineSegments>
+              </group>
+            );
+          })}
+        </group>
+      )}
 
       {/* Render solver placements if available, otherwise show aggregate box */}
       {hasPlacedItems ? (

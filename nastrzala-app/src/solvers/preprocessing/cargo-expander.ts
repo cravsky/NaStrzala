@@ -29,24 +29,26 @@ export function deriveMeta(def: CargoDefinition): CargoDerivedMeta {
     (dims_mm.length / 1000) * (dims_mm.width / 1000) * (dims_mm.height / 1000);
   const density_kg_per_m3 =
     volume_m3 > 0 ? def.weight_kg / volume_m3 : Number.POSITIVE_INFINITY;
-
-  // Long heuristic: max dim >= 3 * min dim (solver-rules §5)
-  const dims = [dims_mm.length, dims_mm.width, dims_mm.height];
-  const maxDim = Math.max(...dims);
-  const minDim = Math.min(...dims);
-  const is_long = maxDim >= 3 * minDim;
-  let long_axis: "length" | "width" | "height" | null = null;
-  if (is_long) {
-    if (maxDim === dims_mm.length) long_axis = "length";
-    else if (maxDim === dims_mm.width) long_axis = "width";
-    else long_axis = "height";
-  }
+  // Revised LONG heuristic: consider only two largest dimensions (ignore thinnest)
+  // to avoid classifying low-profile pallets as LONG purely due to small height.
+  const LONG_RATIO = 4; // Require clearly long shape (e.g., profiles, rods)
+  const dimsAnnotated = [
+    { value: dims_mm.length, axis: "length" as const },
+    { value: dims_mm.width, axis: "width" as const },
+    { value: dims_mm.height, axis: "height" as const },
+  ].sort((a, b) => b.value - a.value);
+  const largest = dimsAnnotated[0];
+  const secondLargest = dimsAnnotated[1];
+  const is_long = largest.value >= LONG_RATIO * secondLargest.value;
+  const long_axis: "length" | "width" | "height" | null = is_long ? largest.axis : null;
 
   // Heavy / light heuristic based on density threshold (solver-rules §3)
   const HEAVY_DENSITY_THRESHOLD = 300; // kg/m3
   const LIGHT_DENSITY_THRESHOLD = 150; // kg/m3
   const is_heavy = density_kg_per_m3 >= HEAVY_DENSITY_THRESHOLD;
-  const is_light = density_kg_per_m3 <= LIGHT_DENSITY_THRESHOLD;
+  // Suppress LIGHT classification for pallet/platform items to avoid misleading priority
+  const isPalletLike = /pallet|platform/i.test(def.cargo_id);
+  let is_light = density_kg_per_m3 <= LIGHT_DENSITY_THRESHOLD && !isPalletLike;
 
   return {
     dims_mm,

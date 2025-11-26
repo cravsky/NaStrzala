@@ -15,7 +15,7 @@ These guidelines make AI agents immediately productive in this repo. Focus on ex
 
 ## Solver Architecture (Packing Pipeline)
 Stages executed in `solve()` (`solver.ts`):
-1. Expand items → pieces (`preprocessing/cargo-expander.ts`). Derives meta (long/heavy/light) using: long if max_dim ≥ 3×min_dim; density thresholds heavy ≥300 kg/m³, light ≤150 kg/m³.
+1. Expand items → pieces (`preprocessing/cargo-expander.ts`). Derives meta (long/heavy/light) using: long when ratio of the two largest dims ≥ 4× (ignore thinnest); density thresholds heavy ≥300 kg/m³, light ≤150 kg/m³ (LIGHT suppressed for pallets/platforms).
 2. Priority sort (`preprocessing/priority-sorter.ts`): buckets 0 LONG, 1 VERTICAL, 2 HEAVY, 3 STANDARD, 4 LIGHT/FRAGILE; sort by bucket, then weight desc, then volume desc.
 3. Initialize free space (`preprocessing/space-initializer.ts`): start full cargo box, carve wheel arches + `vehicle.obstacles` into multiple FreeBox regions.
 4. Trip packing loop (`packing/trip-packer.ts`): iteratively `placePieceInFreeSpace` until no progress; supports multiple trips (`max_trips`).

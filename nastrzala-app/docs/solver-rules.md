@@ -68,10 +68,11 @@ Dla uproszczenia MVP:
 
 ## 5. Długie ładunki (long) — kanał podłogowy
 
-„Long” wyliczamy automatycznie, np. gdy:
-- największy wymiar jest ≥ 3× większy niż najmniejszy
+„Long” wyliczamy automatycznie, gdy kształt jest ewidentnie wydłużony w planie podłogi:
+- stosunek dwóch największych wymiarów jest ≥ 4× (najmniejszy wymiar ignorujemy),
+- przykłady: listwy, karnisze, rury, profile 3–6 m.
 
-Przykład: listwy, rury, profile 3–6 m.
+Uwaga: elementy „stojące” (np. lodówki/płyty oznaczone jako `vertical`) nie są traktowane jako LONG — mają własne zasady rozmieszczenia.
 
 Reguły:
 
