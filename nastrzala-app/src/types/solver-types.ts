@@ -1,3 +1,30 @@
+/**
+ * @module types/solver-types
+ * Types for solver placements, free space, and responses.
+ */
+
+/**
+ * Represents a placed cargo item in the solution.
+ * @typedef {Object} SolverItemPlacement
+ * @property {CargoPiece} piece - The cargo piece placed.
+ * @property {[number, number, number]} anchor - Minimum corner [x, y, z] of placement.
+ * @property {[number, number, number]} size - Dimensions [dx, dy, dz] of the piece.
+ */
+
+/**
+ * Represents a free space region in the cargo area.
+ * @typedef {Object} FreeBox
+ * @property {{x: number, y: number, z: number}} min - Minimum corner coordinates.
+ * @property {{x: number, y: number, z: number}} max - Maximum corner coordinates.
+ */
+
+/**
+ * Solver response object returned by the main solver.
+ * @typedef {Object} SolverResponse
+ * @property {string} status - "ok", "partial", or "no_fit".
+ * @property {SolverItemPlacement[]} placements - List of placed items.
+ * @property {CargoPiece[]} remaining - List of unplaced items.
+ */
 // solver-types.ts
 // Type definitions for the NaStrzala 3D packing solver (MVP).
 

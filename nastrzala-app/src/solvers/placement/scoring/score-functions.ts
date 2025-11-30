@@ -1,4 +1,49 @@
 /**
+ * @module scoring/score-functions
+ * Scoring heuristics for cargo placement candidates.
+ * Provides types and pure functions for evaluating placement quality.
+ */
+
+/**
+ * Context for scoring a placement candidate.
+ * @typedef {Object} ScoreContext
+ * @property {CargoPiece} piece - The cargo piece being placed.
+ * @property {[number, number, number]} anchor - Minimum corner [x, y, z] of placement.
+ * @property {[number, number, number]} size - Dimensions [dx, dy, dz] of the piece.
+ * @property {LoadZones} zones - Vehicle cargo space zones.
+ * @property {boolean} sameGroup - True if candidate touches at least one same-group piece.
+ * @property {number} clusterDistance - Manhattan distance in XY to nearest same-group piece.
+ * @property {boolean} stackingOnSameFootprint - True if directly above an existing same-group footprint.
+ * @property {boolean} [newFootprint] - True if starts a new column footprint.
+ * @property {number} [distinctFootprints] - Number of columns currently present.
+ * @property {number} [currentFootprintHeight] - Height of this column before placement.
+ * @property {number} [minColumnHeight] - Minimum height among existing columns.
+ * @property {number} [maxColumnHeight] - Maximum height among existing columns.
+ * @property {number} [heightSpreadAfter] - Projected spread after placement.
+ * @property {number} [maxColumns] - Heuristic desired max columns (e.g. 2 for pallets).
+ * @property {Map<number, number>} [palletRowCounts] - Pallet piece counts grouped by X.
+ * @property {number} [firstIncompleteRowX] - Smallest X row whose count < maxColumns.
+ * @property {boolean} [isStartingNewRow] - True if candidate would start a new X row.
+ * @property {number} [candidateRowX] - X of candidate row (floor level).
+ * @property {number[]} [frontRowBaseYs] - Y positions of existing front-row bases.
+ * @property {boolean} [isFrontRowCandidate] - True if candidate is in front row.
+ * @property {number} [mirrorTargetY] - Desired mirrored Y for symmetry.
+ * @property {number} [centerOffsetBefore] - Center-of-mass offset before placement.
+ * @property {number} [centerOffsetAfter] - Projected offset after placement.
+ * @property {number} [frontRowCount] - Number of pieces in front row.
+ * @property {number} [frontRowCapacity] - Max pieces in front row.
+ * @property {boolean} [isNewFrontSlot] - True if candidate starts a new front slot.
+ * @property {boolean} [centerBandOccupied] - True if center band is occupied by vertical cargo.
+ */
+
+/**
+ * Computes the score for a placement candidate based on multiple heuristics.
+ * Higher scores indicate better placements.
+ * @param {ScoreContext} ctx - Context for scoring.
+ * @param {number} preferredGap - Preferred gap for clustering.
+ * @returns {number} Placement score.
+ */
+/**
  * Individual scoring heuristics for candidate placements.
  * Each function evaluates a specific aspect (stability, proximity, stacking, etc).
  * Pure functions only.

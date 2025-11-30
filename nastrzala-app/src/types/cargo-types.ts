@@ -1,3 +1,20 @@
+/**
+ * @module types/cargo-types
+ * Types for cargo items and pieces.
+ */
+
+/**
+ * Represents a single cargo item or expanded piece.
+ * @typedef {Object} CargoPiece
+ * @property {string} cargo_id - Unique identifier for the cargo type.
+ * @property {string} label - Human-readable label.
+ * @property {string} category - Category of cargo.
+ * @property {string} unit - Unit of measurement.
+ * @property {{length: number, width: number, height: number}} dims_mm - Dimensions in millimeters.
+ * @property {number} weight_kg - Weight in kilograms.
+ * @property {object} flags - Packing flags (stackable, fragile, vertical, allowRotations).
+ * @property {object} meta - Derived meta info (behavior, weightClass, etc).
+ */
 // cargo-types.ts
 // Cargo type models for NaStrzala (MVP)
 // This file defines the data structures used for describing cargo items

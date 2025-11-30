@@ -1,4 +1,21 @@
 /**
+ * @module candidates/generator
+ * Generates placement candidates for cargo pieces.
+ * Implements filtering, stacking, and scoring logic.
+ */
+
+/**
+ * Generates all valid placement candidates for a cargo piece.
+ * Applies orientation, stacking, support, and scoring rules.
+ * @param {VehicleDefinition} vehicle - Vehicle definition.
+ * @param {CargoPiece} piece - Cargo piece to place.
+ * @param {FreeBox[]} freeBoxes - List of available free space boxes.
+ * @param {SolverItemPlacement[]} existing - Already placed items.
+ * @param {LoadZones} zones - Cargo space zones.
+ * @param {SolverConfig} config - Solver configuration.
+ * @returns {PlacementCandidate[]} Array of valid placement candidates, sorted by score.
+ */
+/**
  * Generates raw placement candidates for cargo pieces.
  * Responsible for producing all possible placements before filtering.
  */

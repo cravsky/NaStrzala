@@ -1,3 +1,19 @@
+/**
+ * @module solver
+ * Main entry point for the cargo packing solver.
+ * Implements the packing pipeline: expansion, sorting, space initialization, packing loop.
+ * Pure functions only (except debug logging).
+ */
+
+/**
+ * Solves the cargo packing problem for a given vehicle and items.
+ * @param {object} params - Solver parameters.
+ * @param {string} params.unit - Unit of measurement (e.g. "mm").
+ * @param {VehicleDefinition} params.vehicle - Vehicle definition.
+ * @param {CargoItem[]} params.items - List of cargo items.
+ * @param {number} [params.max_trips] - Maximum number of trips.
+ * @returns {SolverResponse} Packing result including placements and status.
+ */
 // solver.ts
 // Main solver orchestration with stage-by-stage logging
 // Coordinates preprocessing, placement, and packing modules
