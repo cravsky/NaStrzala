@@ -15,6 +15,7 @@ import { expandCargoItems, logExpandedPieces } from "./preprocessing/cargo-expan
 import { sortByPriority, logSortedPieces } from "./preprocessing/priority-sorter";
 import { initializeFreeSpace, logInitialSpace } from "./preprocessing/space-initializer";
 import { packSingleTrip, logTripPacking } from "./packing/trip-packer";
+import { groupPiecesByBehavior, flattenGroups, logGroups } from "./preprocessing/cargo-grouper";
 
 const DEBUG = true; // Set to false to disable stage logging
 
@@ -34,6 +35,11 @@ export function solve(request: SolverRequest): SolverResponse {
   const sortedPieces = sortByPriority(pieces);
   if (!DEBUG) logSortedPieces(sortedPieces);
 
+  // STAGE 2B: Group by behavior for clustered packing
+  const groups = groupPiecesByBehavior(sortedPieces);
+  if (DEBUG) logGroups(groups);
+  const groupedSequence = flattenGroups(groups);
+
   // STAGE 3: Initialize free space with obstacles carved out
   const initialSpace = initializeFreeSpace(vehicle);
   if (DEBUG) logInitialSpace(vehicle, initialSpace);
@@ -43,7 +49,7 @@ export function solve(request: SolverRequest): SolverResponse {
   if (DEBUG) console.log("─".repeat(80));
 
   const allTrips: SolverTrip[] = [];
-  let remaining = sortedPieces;
+  let remaining = groupedSequence;
 
   for (let t = 0; t < maxTrips && remaining.length > 0; t++) {
     const { placements, remaining: nextRemaining } = packSingleTrip(vehicle, remaining);

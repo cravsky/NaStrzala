@@ -50,6 +50,25 @@ export function deriveMeta(def: CargoDefinition): CargoDerivedMeta {
   const isPalletLike = /pallet|platform/i.test(def.cargo_id);
   let is_light = density_kg_per_m3 <= LIGHT_DENSITY_THRESHOLD && !isPalletLike;
 
+  // Behaviour classification (PLATE | LONG | BOX)
+  let behavior: "PLATE" | "LONG" | "BOX" = "BOX";
+  if (is_long) {
+    behavior = "LONG";
+  } else {
+    // Plate: one dominant dimension, low height profile, but not qualifying as LONG
+    const smallest = dimsAnnotated[2];
+    const heightIsSmall = smallest.axis === "height" && smallest.value < largest.value * 0.25;
+    const dominanceRatio = largest.value / smallest.value;
+    if (heightIsSmall && dominanceRatio >= 2.5) {
+      behavior = "PLATE";
+    }
+  }
+
+  // Weight class (HEAVY | MEDIUM | LIGHT)
+  let weightClass: "HEAVY" | "MEDIUM" | "LIGHT" = "MEDIUM";
+  if (is_heavy) weightClass = "HEAVY";
+  else if (is_light) weightClass = "LIGHT";
+
   return {
     dims_mm,
     volume_m3,
@@ -58,6 +77,8 @@ export function deriveMeta(def: CargoDefinition): CargoDerivedMeta {
     is_heavy,
     is_light,
     long_axis,
+    behavior,
+    weightClass,
   };
 }
 
@@ -96,9 +117,11 @@ export function logExpandedPieces(pieces: CargoPiece[]): void {
   
   for (const piece of pieces) {
     const flags = [];
-    if (piece.meta.is_long) flags.push("LONG");
+    if (piece.meta.behavior === "LONG") flags.push("LONG");
+    if (piece.meta.behavior === "PLATE") flags.push("PLATE");
     if (piece.meta.is_heavy) flags.push("HEAVY");
     if (piece.meta.is_light) flags.push("LIGHT");
+    flags.push(piece.meta.weightClass);
     if (piece.flags.vertical) flags.push("VERTICAL");
     if (piece.flags.fragile) flags.push("FRAGILE");
     if (!piece.flags.stackable) flags.push("NON-STACKABLE");

@@ -104,6 +104,10 @@ export interface CargoDerivedMeta {
   is_light: boolean;
   /** Name of the dominant axis for long items, or null if not long. */
   long_axis: "length" | "width" | "height" | null;
+  /** Behavioural packing class (human heuristic). */
+  behavior: "PLATE" | "LONG" | "BOX";
+  /** Coarse weight class for vertical placement heuristics. */
+  weightClass: "HEAVY" | "MEDIUM" | "LIGHT";
 }
 
 /**

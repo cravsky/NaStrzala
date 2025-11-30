@@ -37,6 +37,7 @@ export function packSingleTrip(
 
     for (const piece of remaining) {
       const { placement, updatedFreeBoxes } = placePieceInFreeSpace(
+        vehicle,
         piece,
         freeBoxes,
         placements
