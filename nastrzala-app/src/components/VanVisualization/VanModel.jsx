@@ -39,6 +39,9 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
     '#673ab7', // deep purple
   ];
   
+  const bulkheadColor = "#3b82f6"; // visual cue for direction (front / driver side)
+  const wallColor = "#718096";
+
   // Track which cargo IDs we've seen and assign colors sequentially
   const cargoIdColorMap = {};
   let colorIndex = 0;
@@ -59,34 +62,34 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
         <meshStandardMaterial color="#4a5568" />
       </mesh>
 
-      {/* Left wall (negative X) */}
+      {/* Bulkhead (front wall, negative X in scene) */}
       <mesh position={[-(internalLength + vanWallThickness) / 2, floorHeight + internalHeight / 2, 0]} castShadow>
         <boxGeometry args={[vanWallThickness, internalHeight, internalWidth]} />
-        <meshStandardMaterial color="#718096" transparent opacity={0.3} />
+        <meshStandardMaterial color={bulkheadColor} transparent opacity={0.45} />
       </mesh>
 
       {/* Right wall (positive X) */}
       <mesh position={[(internalLength + vanWallThickness) / 2, floorHeight + internalHeight / 2, 0]} castShadow>
         <boxGeometry args={[vanWallThickness, internalHeight, internalWidth]} />
-        <meshStandardMaterial color="#718096" transparent opacity={0.3} />
+        <meshStandardMaterial color={wallColor} transparent opacity={0.3} />
       </mesh>
 
       {/* Back wall (negative Z) */}
       <mesh position={[0, floorHeight + internalHeight / 2, -(internalWidth + vanWallThickness) / 2]} castShadow>
         <boxGeometry args={[internalLength, internalHeight, vanWallThickness]} />
-        <meshStandardMaterial color="#718096" transparent opacity={0.3} />
+        <meshStandardMaterial color={wallColor} transparent opacity={0.3} />
       </mesh>
 
       {/* Front wall (positive Z) - doors/opening */}
       <mesh position={[0, floorHeight + internalHeight / 2, (internalWidth + vanWallThickness) / 2]} castShadow>
         <boxGeometry args={[internalLength, internalHeight, vanWallThickness]} />
-        <meshStandardMaterial color="#718096" transparent opacity={0.2} />
+        <meshStandardMaterial color={wallColor} transparent opacity={0.2} />
       </mesh>
 
       {/* Ceiling - make it less visible */}
       <mesh position={[0, floorHeight + internalHeight + vanWallThickness / 2, 0]} castShadow>
         <boxGeometry args={[internalLength, vanWallThickness, internalWidth]} />
-        <meshStandardMaterial color="#718096" transparent opacity={0.15} />
+        <meshStandardMaterial color={wallColor} transparent opacity={0.15} />
       </mesh>
 
       {/* Wheel arches / obstacles visualization */}
