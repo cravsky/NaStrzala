@@ -5,5 +5,5 @@
   "unit": "mm",
   "dimensions": { "length": 4000, "width": 100, "height": 100 },
   "weight_kg": 18,
-  "flags": { "stackable": false, "allowRotations": true, "fragile": false, "vertical": false }
+  "flags": { "stackable": true, "allowRotations": true, "fragile": false, "vertical": false }
 }
