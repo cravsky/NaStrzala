@@ -10,6 +10,8 @@ import { placePieceInFreeSpace } from "../placement/free-space";
 import type { LoadZones } from "../placement/zones";
 import type { SolverConfig } from "../solver-config";
 
+const DEBUG_FREE = Boolean((globalThis as any)?.process?.env?.NASTRZALA_DEBUG_FREE === "1");
+
 export interface TripPackingResult {
   placements: SolverItemPlacement[];
   remaining: CargoPiece[];
@@ -62,7 +64,24 @@ export function packSingleTrip(
     remaining = nextRemaining;
   }
 
-  return { placements, remaining };
+  const result = { placements, remaining };
+  logFreeBoxes(freeBoxes);
+  return result;
+}
+
+function logFreeBoxes(freeBoxes: FreeBox[]): void {
+  if (!DEBUG_FREE) return;
+  console.log("  Free boxes after packing:");
+  freeBoxes
+    .slice(0, 10)
+    .forEach((fb, idx) => {
+      const sx = fb.max.x - fb.min.x;
+      const sy = fb.max.y - fb.min.y;
+      const sz = fb.max.z - fb.min.z;
+      console.log(
+        `    #${idx}: [${fb.min.x},${fb.min.y},${fb.min.z}]→[${fb.max.x},${fb.max.y},${fb.max.z}] (${sx}×${sy}×${sz})`
+      );
+    });
 }
 
 export function logTripPacking(

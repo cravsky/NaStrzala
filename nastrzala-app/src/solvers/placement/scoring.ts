@@ -58,7 +58,8 @@ const P_EXCESS_GAP = -30;
 const W_STACK_CONTINUE = 35;
 const W_STACK_CONTINUE_FRONT = 20;
 const W_VERTICAL_CENTER = 320;
-const P_VERTICAL_CENTER_MISS = -280;
+const W_VERTICAL_SIDE = 220;
+const P_VERTICAL_CENTER_CLUMP = -180;
 const P_BOX_STACK_CENTER_LOCK = -260;
 const P_PALLET_CENTER_OCCUPY = -600;
 // Column balancing weights (pallet-specific heuristics)
@@ -133,10 +134,11 @@ export function computePlacementScore(ctx: ScoreContext, preferredGap: number): 
         const normalized = 1 - Math.min(deltaToCenter / (zones.width / 2), 1);
         score += W_VERTICAL_CENTER * normalized;
       } else {
-        const overshoot = Math.max(0, deltaToCenter - zones.width * 0.15);
-        if (overshoot > 0) {
-          const penaltyScale = Math.min(overshoot / (zones.width / 2), 1);
-          score += P_VERTICAL_CENTER_MISS * penaltyScale;
+        const normalized = Math.min(deltaToCenter / (zones.width / 2), 1);
+        if (normalized < 0.15) {
+          score += P_VERTICAL_CENTER_CLUMP;
+        } else {
+          score += W_VERTICAL_SIDE * normalized;
         }
       }
     }

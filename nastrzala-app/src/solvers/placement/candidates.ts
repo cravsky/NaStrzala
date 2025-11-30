@@ -74,16 +74,18 @@ export function buildPlacementCandidates(
   const frontRowCapacity = Math.min(2, Math.max(1, Math.floor(vehicle.cargo_space.width / baseRowWidth)));
   const frontRowIncomplete = frontRowEntries.length < frontRowCapacity;
   const hasAnyFloor = existingFloor.length > 0;
-  const walkwayStartX = hasAnyFloor
-    ? (Number.isFinite(frontRowMinX) ? frontRowMinX : 0) + frontRowThickness + 5
+  const walkwayStartX = hasAnyFloor && frontRowEntries.length > 0
+    ? (frontRowMinX + frontRowThickness + 5)
     : 0;
-  const occupiedDepthX = hasAnyFloor
-    ? existingFloor.reduce((max, fp) => Math.max(max, fp.anchor[0] + fp.size[0]), 0)
-    : 0;
-  const verticalMinX = hasAnyFloor ? Math.max(walkwayStartX, occupiedDepthX + 5) : 0;
+  const verticalMinX = hasAnyFloor ? Math.max(0, walkwayStartX) : 0;
   const floorObstacles = hasAnyFloor
     ? existingFloor
-        .map(fp => ({ start: fp.anchor[0], end: fp.anchor[0] + fp.size[0] }))
+        .map(fp => ({
+          start: fp.anchor[0],
+          end: fp.anchor[0] + fp.size[0],
+          minY: fp.anchor[1],
+          maxY: fp.anchor[1] + fp.size[1],
+        }))
         .sort((a, b) => a.start - b.start)
     : [];
   const centerBandMin = zones.width * 0.35;
@@ -150,7 +152,12 @@ export function buildPlacementCandidates(
         if (piece.flags.vertical) {
           let shiftedX = anchor[0];
           if (shiftedX < verticalMinX) shiftedX = Math.max(verticalMinX, free.min.x);
+          const candidateMinY = anchor[1];
+          const candidateMaxY = anchor[1] + size[1];
           for (const obs of floorObstacles) {
+            if (candidateMaxY <= obs.minY || candidateMinY >= obs.maxY) {
+              continue; // obstacle occupies disjoint lateral band; ignore for walkway calculations
+            }
             if (shiftedX + size[0] <= obs.start) break;
             if (shiftedX < obs.end && shiftedX + size[0] > obs.start) {
               shiftedX = obs.end + 5;

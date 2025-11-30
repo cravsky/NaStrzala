@@ -11,10 +11,12 @@ export interface CargoPieceGroup {
   behavior: string;
   pieces: CargoPiece[];
   priorityBucket: number;
+  firstIndex: number;
 }
 
 export function groupPiecesByBehavior(pieces: CargoPiece[]): CargoPieceGroup[] {
   const map = new Map<string, CargoPieceGroup>();
+  let position = 0;
   for (const p of pieces) {
     const key = `${p.cargo_id}::${p.meta.behavior}`;
     let grp = map.get(key);
@@ -25,16 +27,19 @@ export function groupPiecesByBehavior(pieces: CargoPiece[]): CargoPieceGroup[] {
         behavior: p.meta.behavior,
         pieces: [],
         priorityBucket: packingPriorityBucket(p),
+        firstIndex: position,
       };
       map.set(key, grp);
     }
     grp.pieces.push(p);
     grp.priorityBucket = Math.min(grp.priorityBucket, packingPriorityBucket(p));
+    position++;
   }
   // Deterministic sort: by behavior class order, then cargo_id, then piece index.
   const behaviorOrder: Record<string, number> = { LONG: 0, PLATE: 1, BOX: 2 };
   const weightRank = { HEAVY: 0, MEDIUM: 1, LIGHT: 2 } as const;
   const groups = Array.from(map.values()).sort((a, b) => {
+    if (a.firstIndex !== b.firstIndex) return a.firstIndex - b.firstIndex;
     // Primary: behavior order keeps structural heuristics (LONG → PLATE → BOX)
     const bo = behaviorOrder[a.behavior] - behaviorOrder[b.behavior];
     if (bo !== 0) return bo;
@@ -72,7 +77,23 @@ export function groupPiecesByBehavior(pieces: CargoPiece[]): CargoPieceGroup[] {
 
 export function flattenGroups(groups: CargoPieceGroup[]): CargoPiece[] {
   const out: CargoPiece[] = [];
-  for (const g of groups) out.push(...g.pieces);
+  const buckets = Array.from(new Set(groups.map(g => g.priorityBucket)));
+  for (const bucket of buckets) {
+    const sameBucket = groups.filter(g => g.priorityBucket === bucket);
+    if (sameBucket.length === 0) continue;
+    const pointers = sameBucket.map(() => 0);
+    let remaining = sameBucket.reduce((sum, g) => sum + g.pieces.length, 0);
+    while (remaining > 0) {
+      for (let i = 0; i < sameBucket.length; i++) {
+        const g = sameBucket[i];
+        const idx = pointers[i];
+        if (idx >= g.pieces.length) continue;
+        out.push(g.pieces[idx]);
+        pointers[i] = idx + 1;
+        remaining--;
+      }
+    }
+  }
   return out;
 }
 
