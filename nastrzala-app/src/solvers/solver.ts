@@ -16,6 +16,8 @@ import { sortByPriority, logSortedPieces } from "./preprocessing/priority-sorter
 import { initializeFreeSpace, logInitialSpace } from "./preprocessing/space-initializer";
 import { packSingleTrip, logTripPacking } from "./packing/trip-packer";
 import { groupPiecesByBehavior, flattenGroups, logGroups } from "./preprocessing/cargo-grouper";
+import { getSolverConfig } from "./solver-config";
+import { initializeZones } from "./preprocessing/zones-initializer";
 
 const DEBUG = true; // Set to false to disable stage logging
 
@@ -44,6 +46,10 @@ export function solve(request: SolverRequest): SolverResponse {
   const initialSpace = initializeFreeSpace(vehicle);
   if (DEBUG) logInitialSpace(vehicle, initialSpace);
 
+  // STAGE 3B: Initialize heuristic zones (floor & wall bands)
+  const config = getSolverConfig();
+  const zones = initializeZones(vehicle, config);
+
   // STAGE 4: Pack pieces into trips
   if (DEBUG) console.log(`\n🚛 STAGE 4: Packing into ${maxTrips} trip(s)`);
   if (DEBUG) console.log("─".repeat(80));
@@ -52,7 +58,7 @@ export function solve(request: SolverRequest): SolverResponse {
   let remaining = groupedSequence;
 
   for (let t = 0; t < maxTrips && remaining.length > 0; t++) {
-    const { placements, remaining: nextRemaining } = packSingleTrip(vehicle, remaining);
+    const { placements, remaining: nextRemaining } = packSingleTrip(vehicle, remaining, zones, config);
     
     if (DEBUG) logTripPacking(t, placements, nextRemaining);
     

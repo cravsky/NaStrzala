@@ -7,6 +7,8 @@ import type { CargoPiece } from "../../types/cargo-types";
 import type { FreeBox, SolverItemPlacement } from "../../types/solver-types";
 import { initializeFreeSpace } from "../preprocessing/space-initializer";
 import { placePieceInFreeSpace } from "../placement/free-space";
+import type { LoadZones } from "../placement/zones";
+import type { SolverConfig } from "../solver-config";
 
 export interface TripPackingResult {
   placements: SolverItemPlacement[];
@@ -19,7 +21,9 @@ export interface TripPackingResult {
  */
 export function packSingleTrip(
   vehicle: VehicleDefinition,
-  pieces: CargoPiece[]
+  pieces: CargoPiece[],
+  zones: LoadZones,
+  config: SolverConfig
 ): TripPackingResult {
   const placements: SolverItemPlacement[] = [];
   if (pieces.length === 0) {
@@ -40,7 +44,9 @@ export function packSingleTrip(
         vehicle,
         piece,
         freeBoxes,
-        placements
+        placements,
+        zones,
+        config
       );
 
       if (!placement) {

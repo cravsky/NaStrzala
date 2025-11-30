@@ -24,23 +24,33 @@ export function groupPiecesByBehavior(pieces: CargoPiece[]): CargoPieceGroup[] {
   }
   // Deterministic sort: by behavior class order, then cargo_id, then piece index.
   const behaviorOrder: Record<string, number> = { LONG: 0, PLATE: 1, BOX: 2 };
+  const weightRank = { HEAVY: 0, MEDIUM: 1, LIGHT: 2 } as const;
   const groups = Array.from(map.values()).sort((a, b) => {
+    // Primary: behavior order
     const bo = behaviorOrder[a.behavior] - behaviorOrder[b.behavior];
     if (bo !== 0) return bo;
+    // Secondary: aggregate weight class (smallest rank among pieces)
+    const aRank = Math.min(...a.pieces.map(p => weightRank[p.meta.weightClass]));
+    const bRank = Math.min(...b.pieces.map(p => weightRank[p.meta.weightClass]));
+    if (aRank !== bRank) return aRank - bRank;
+    // Tertiary: total volume (descending)
+    const aVol = a.pieces.reduce((s, p) => s + p.meta.volume_m3, 0);
+    const bVol = b.pieces.reduce((s, p) => s + p.meta.volume_m3, 0);
+    if (aVol !== bVol) return bVol - aVol;
+    // Quaternary: cargo_id lexical
     if (a.cargo_id < b.cargo_id) return -1;
     if (a.cargo_id > b.cargo_id) return 1;
+    // Final: length to favor larger groups first
+    if (a.pieces.length !== b.pieces.length) return b.pieces.length - a.pieces.length;
     return 0;
   });
   for (const g of groups) {
     g.pieces.sort((a, b) => {
-      // Heavy & volume first inside a group
       if (a.meta.weightClass !== b.meta.weightClass) {
-        const weightRank = { HEAVY: 0, MEDIUM: 1, LIGHT: 2 } as const;
         return weightRank[a.meta.weightClass] - weightRank[b.meta.weightClass];
       }
-      const va = a.meta.volume_m3;
-      const vb = b.meta.volume_m3;
-      if (va !== vb) return vb - va;
+      if (a.meta.volume_m3 !== b.meta.volume_m3) return b.meta.volume_m3 - a.meta.volume_m3;
+      // Deterministic fallback: piece index (source order)
       return a.index - b.index;
     });
   }
