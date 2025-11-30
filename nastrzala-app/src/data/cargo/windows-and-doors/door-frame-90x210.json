@@ -1,0 +1,9 @@
+{
+  "cargo_id": "door-frame-90x210",
+  "label": "Drzwi z ościeżnicą 90×210 cm",
+  "category": "windows-and-doors",
+  "unit": "mm",
+  "dimensions": { "length": 2100, "width": 900, "height": 120 },
+  "weight_kg": 40,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": true, "vertical": true }
+}

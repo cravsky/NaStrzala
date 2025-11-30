@@ -1,0 +1,9 @@
+{
+  "cargo_id": "osb-board-125x250",
+  "label": "Płyta OSB 125×250 cm",
+  "category": "plates-and-materials",
+  "unit": "mm",
+  "dimensions": { "length": 2500, "width": 1250, "height": 18 },
+  "weight_kg": 32,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": false, "vertical": true }
+}

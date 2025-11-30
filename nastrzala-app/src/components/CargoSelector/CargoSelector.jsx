@@ -2,6 +2,17 @@ import { useState } from 'react';
 import styles from './CargoSelector.module.css';
 import { cargoTypes } from '../../data/cargo';
 
+// Map internal category IDs to Polish names
+const categoryLabels = {
+  'plates-and-materials': 'Płyty i materiały płaskie',
+  'long-elements': 'Długie elementy',
+  'windows-and-doors': 'Okna i drzwi',
+  'appliances': 'AGD i wyposażenie',
+  'pallets-and-containers': 'Palety i duże boxy',
+  'cartons-and-packages': 'Kartony i paczki',
+  'construction-equipment-and-machines': 'Sprzęt budowlany i maszyny'
+};
+
 // Get unique categories from cargoTypes
 const categories = Array.from(new Set(cargoTypes.map(c => c.category).filter(Boolean)));
 
@@ -43,7 +54,7 @@ function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
           >
             <option value="">-- Wybierz kategorię --</option>
             {categories.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
+              <option key={cat} value={cat}>{categoryLabels[cat] || cat}</option>
             ))}
           </select>
         </div>

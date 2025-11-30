@@ -1,0 +1,9 @@
+{
+  "cargo_id": "demolition-hammer-case",
+  "label": "Młot wyburzeniowy w kasecie",
+  "category": "construction-equipment-and-machines",
+  "unit": "mm",
+  "dimensions": { "length": 600, "width": 250, "height": 200 },
+  "weight_kg": 18,
+  "flags": { "stackable": false, "allowRotations": true, "fragile": false, "vertical": false }
+}

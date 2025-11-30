@@ -1,0 +1,9 @@
+{
+  "cargo_id": "workshop-trolley",
+  "label": "Wózek narzędziowy (warsztatowy)",
+  "category": "construction-equipment-and-machines",
+  "unit": "mm",
+  "dimensions": { "length": 900, "width": 500, "height": 900 },
+  "weight_kg": 32,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": false, "vertical": false }
+}

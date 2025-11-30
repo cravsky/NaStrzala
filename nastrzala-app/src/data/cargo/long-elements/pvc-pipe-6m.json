@@ -1,0 +1,9 @@
+{
+  "cargo_id": "pvc-pipe-6m",
+  "label": "Rura PVC 6 m",
+  "category": "long-elements",
+  "unit": "mm",
+  "dimensions": { "length": 6000, "width": 75, "height": 75 },
+  "weight_kg": 12,
+  "flags": { "stackable": false, "allowRotations": true, "fragile": false, "vertical": false }
+}

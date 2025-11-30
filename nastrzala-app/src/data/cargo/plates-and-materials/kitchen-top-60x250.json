@@ -1,0 +1,9 @@
+{
+  "cargo_id": "kitchen-top-60x250",
+  "label": "Blat kuchenny 60×250 cm",
+  "category": "plates-and-materials",
+  "unit": "mm",
+  "dimensions": { "length": 2500, "width": 600, "height": 38 },
+  "weight_kg": 28,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": false, "vertical": true }
+}

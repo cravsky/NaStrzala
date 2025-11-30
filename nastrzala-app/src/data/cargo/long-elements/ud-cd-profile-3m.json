@@ -1,0 +1,9 @@
+{
+  "cargo_id": "ud-cd-profile-3m",
+  "label": "Profil UD/CD 3 m",
+  "category": "long-elements",
+  "unit": "mm",
+  "dimensions": { "length": 3000, "width": 27, "height": 60 },
+  "weight_kg": 1.5,
+  "flags": { "stackable": false, "allowRotations": true, "fragile": false, "vertical": false }
+}

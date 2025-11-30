@@ -1,0 +1,9 @@
+{
+  "cargo_id": "window-80x120",
+  "label": "Okno PCV 80×120 cm",
+  "category": "windows-and-doors",
+  "unit": "mm",
+  "dimensions": { "length": 1200, "width": 800, "height": 120 },
+  "weight_kg": 28,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": true, "vertical": true }
+}

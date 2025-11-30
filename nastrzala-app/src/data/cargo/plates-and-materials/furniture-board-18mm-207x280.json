@@ -1,0 +1,9 @@
+{
+  "cargo_id": "furniture-board-18mm-207x280",
+  "label": "Płyta meblowa 18 mm 207×280 cm",
+  "category": "plates-and-materials",
+  "unit": "mm",
+  "dimensions": { "length": 2800, "width": 2070, "height": 18 },
+  "weight_kg": 40,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": false, "vertical": true }
+}

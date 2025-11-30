@@ -1,0 +1,9 @@
+{
+  "cargo_id": "toolbox-xl",
+  "label": "Skrzynka narzędziowa XL",
+  "category": "construction-equipment-and-machines",
+  "unit": "mm",
+  "dimensions": { "length": 800, "width": 400, "height": 350 },
+  "weight_kg": 12,
+  "flags": { "stackable": true, "allowRotations": true, "fragile": false, "vertical": false }
+}

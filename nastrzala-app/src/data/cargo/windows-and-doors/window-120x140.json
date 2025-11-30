@@ -1,0 +1,9 @@
+{
+  "cargo_id": "window-120x140",
+  "label": "Okno PCV 120×140 cm",
+  "category": "windows-and-doors",
+  "unit": "mm",
+  "dimensions": { "length": 1400, "width": 1200, "height": 120 },
+  "weight_kg": 38,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": true, "vertical": true }
+}

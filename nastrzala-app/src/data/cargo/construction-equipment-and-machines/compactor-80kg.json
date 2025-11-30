@@ -1,0 +1,9 @@
+{
+  "cargo_id": "compactor-80kg",
+  "label": "Zagęszczarka 80 kg",
+  "category": "construction-equipment-and-machines",
+  "unit": "mm",
+  "dimensions": { "length": 700, "width": 400, "height": 800 },
+  "weight_kg": 80,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": false, "vertical": false }
+}

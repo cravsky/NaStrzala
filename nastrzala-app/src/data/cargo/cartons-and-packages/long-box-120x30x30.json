@@ -1,0 +1,9 @@
+{
+  "cargo_id": "long-box-120x30x30",
+  "label": "Karton długi 120×30×30 cm",
+  "category": "cartons-and-packages",
+  "unit": "mm",
+  "dimensions": { "length": 1200, "width": 300, "height": 300 },
+  "weight_kg": 3.2,
+  "flags": { "stackable": true, "allowRotations": true, "fragile": false, "vertical": false }
+}

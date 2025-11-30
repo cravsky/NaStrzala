@@ -1,0 +1,9 @@
+{
+  "cargo_id": "medium-box-60x40x40",
+  "label": "Karton średni 60×40×40 cm",
+  "category": "cartons-and-packages",
+  "unit": "mm",
+  "dimensions": { "length": 600, "width": 400, "height": 400 },
+  "weight_kg": 2.5,
+  "flags": { "stackable": true, "allowRotations": true, "fragile": false, "vertical": false }
+}

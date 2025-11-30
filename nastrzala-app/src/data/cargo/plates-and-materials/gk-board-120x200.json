@@ -1,0 +1,9 @@
+{
+  "cargo_id": "gk-board-120x200",
+  "label": "Płyta g-k 120×200 cm",
+  "category": "plates-and-materials",
+  "unit": "mm",
+  "dimensions": { "length": 2000, "width": 1200, "height": 12 },
+  "weight_kg": 18,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": false, "vertical": true }
+}

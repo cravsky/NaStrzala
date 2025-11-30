@@ -1,0 +1,9 @@
+{
+  "cargo_id": "pvc-pipe-4m",
+  "label": "Rura PVC 4 m",
+  "category": "long-elements",
+  "unit": "mm",
+  "dimensions": { "length": 4000, "width": 75, "height": 75 },
+  "weight_kg": 8,
+  "flags": { "stackable": false, "allowRotations": true, "fragile": false, "vertical": false }
+}

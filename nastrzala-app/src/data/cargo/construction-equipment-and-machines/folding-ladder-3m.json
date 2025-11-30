@@ -1,0 +1,9 @@
+{
+  "cargo_id": "folding-ladder-3m",
+  "label": "Drabina rozkładana 3 m",
+  "category": "construction-equipment-and-machines",
+  "unit": "mm",
+  "dimensions": { "length": 3000, "width": 400, "height": 120 },
+  "weight_kg": 14,
+  "flags": { "stackable": false, "allowRotations": true, "fragile": false, "vertical": false }
+}

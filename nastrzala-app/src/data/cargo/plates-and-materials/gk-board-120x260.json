@@ -1,0 +1,9 @@
+{
+  "cargo_id": "gk-board-120x260",
+  "label": "Płyta g-k 120×260 cm",
+  "category": "plates-and-materials",
+  "unit": "mm",
+  "dimensions": { "length": 2600, "width": 1200, "height": 12 },
+  "weight_kg": 24,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": false, "vertical": true }
+}

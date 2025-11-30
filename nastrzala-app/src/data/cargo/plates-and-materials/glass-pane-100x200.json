@@ -1,0 +1,9 @@
+{
+  "cargo_id": "glass-pane-100x200",
+  "label": "Szkło/tafla 100×200 cm",
+  "category": "plates-and-materials",
+  "unit": "mm",
+  "dimensions": { "length": 2000, "width": 1000, "height": 8 },
+  "weight_kg": 32,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": true, "vertical": true }
+}

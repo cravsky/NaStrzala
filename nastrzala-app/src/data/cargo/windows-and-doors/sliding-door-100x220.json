@@ -1,0 +1,9 @@
+{
+  "cargo_id": "sliding-door-100x220",
+  "label": "Drzwi przesuwne 100×220 cm",
+  "category": "windows-and-doors",
+  "unit": "mm",
+  "dimensions": { "length": 2200, "width": 1000, "height": 60 },
+  "weight_kg": 36,
+  "flags": { "stackable": false, "allowRotations": false, "fragile": true, "vertical": true }
+}

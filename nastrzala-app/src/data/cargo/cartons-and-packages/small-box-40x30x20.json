@@ -1,0 +1,9 @@
+{
+  "cargo_id": "small-box-40x30x20",
+  "label": "Karton mały 40×30×20 cm",
+  "category": "cartons-and-packages",
+  "unit": "mm",
+  "dimensions": { "length": 400, "width": 300, "height": 200 },
+  "weight_kg": 1.2,
+  "flags": { "stackable": true, "allowRotations": true, "fragile": false, "vertical": false }
+}
