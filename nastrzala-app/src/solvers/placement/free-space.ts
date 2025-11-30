@@ -65,7 +65,7 @@ export function placePieceInFreeSpace(
   if (freeBoxes.length === 0) {
     return { placement: null, updatedFreeBoxes: freeBoxes };
   }
-  const candidates = buildPlacementCandidates(piece, freeBoxes, existingPlacements, zones, config);
+  const candidates = buildPlacementCandidates(vehicle, piece, freeBoxes, existingPlacements, zones, config);
   if (candidates.length === 0) return { placement: null, updatedFreeBoxes: freeBoxes };
   const chosen = candidates[0];
   const original = [...freeBoxes];

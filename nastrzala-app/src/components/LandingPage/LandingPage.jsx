@@ -18,7 +18,14 @@ function LandingPage() {
   };
 
   const handleCargoSelected = (cargo) => {
-    setSelectedCargo([...selectedCargo, cargo]);
+    // Merge quantities for same cargo_id instead of duplicating rows
+    setSelectedCargo(prev => {
+      const idx = prev.findIndex(c => c.cargo_id === cargo.cargo_id);
+      if (idx === -1) return [...prev, cargo];
+      const updated = [...prev];
+      updated[idx] = { ...updated[idx], quantity: updated[idx].quantity + cargo.quantity };
+      return updated;
+    });
   };
 
   const handleRemoveCargo = (index) => {

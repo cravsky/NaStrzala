@@ -38,6 +38,18 @@ export function generateAnchors(ctx: AnchorContext): [number, number, number][] 
 
   // Cluster adjacency: same group placements – attempt snug positions beside them.
   const sameGroup = existing.filter(p => p.piece.cargo_id === piece.cargo_id && p.piece.meta.behavior === piece.meta.behavior);
+  // Pallet explicit second-footprint anchor along length (X) before stacking growth
+  if (/pallet/i.test(piece.cargo_id)) {
+    const floorBases = sameGroup.filter(p => p.anchor[2] === 0);
+    if (floorBases.length === 1) {
+      const base = floorBases[0];
+      const targetX = base.anchor[0] + base.size[0];
+      // Only add if fits entirely in current free box footprint at floor level
+      if (targetX + dims.dx <= free.max.x && targetX >= free.min.x) {
+        anchors.push([targetX, base.anchor[1], free.min.z]);
+      }
+    }
+  }
   for (const gp of sameGroup) {
     // Along X axis (placing to the right or left)
     anchors.push([gp.anchor[0] + gp.size[0] + (gapY ? 0 : 0), gp.anchor[1], gp.anchor[2]]); // right flush
@@ -47,6 +59,11 @@ export function generateAnchors(ctx: AnchorContext): [number, number, number][] 
     anchors.push([gp.anchor[0], gp.anchor[1] + gp.size[1] + gapY, gp.anchor[2]]);
     const backY = gp.anchor[1] - dims.dy - gapY;
     anchors.push([gp.anchor[0], backY, gp.anchor[2]]);
+
+    // Vertical stacking continuation (flush Z): place directly on top if within same free box vertical span.
+    const topZ = gp.anchor[2] + gp.size[2];
+    // Keep same X,Y footprint for stability.
+    anchors.push([gp.anchor[0], gp.anchor[1], topZ]);
   }
 
   // Deduplicate anchors (string key) and return.

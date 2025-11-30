@@ -8,15 +8,14 @@ function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
 
   const handleAddCargo = () => {
     if (!selectedCargoType) return;
-
     const cargoType = cargoTypes.find(c => c.cargo_id === selectedCargoType);
     if (cargoType) {
       onCargoSelected({
         ...cargoType,
         quantity: quantity
       });
-      setSelectedCargoType('');
-      setQuantity(1);
+      // Do not reset selectedCargoType – allow rapid repeated adds of same type
+      setQuantity(1); // reset quantity only
     }
   };
 
@@ -57,6 +56,7 @@ function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
           onClick={handleAddCargo}
           disabled={!selectedCargoType}
           className={styles.addButton}
+          title={selectedCargoType ? 'Dodaj kolejny ładunek tego typu' : 'Wybierz typ ładunku'}
         >
           Dodaj ładunek
         </button>
