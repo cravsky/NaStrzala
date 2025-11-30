@@ -10,7 +10,6 @@ import { gatherSupportsForPlacement, canStackOn } from "./stacking";
 import type { SolverConfig } from "../solver-config";
 import { computePlacementScore } from "./scoring";
 import type { VehicleDefinition } from "../../types/vehicle-types";
-import { wallAdjacency } from "./zones";
 
 export interface PlacementCandidate {
   anchor: [number, number, number];
@@ -55,6 +54,21 @@ export function buildPlacementCandidates(
 ): PlacementCandidate[] {
   const orientations = getAllowedOrientationsForPiece(piece);
   const sameGroup = existing.filter(p => p.piece.cargo_id === piece.cargo_id && p.piece.meta.behavior === piece.meta.behavior);
+  const palletFloorPlacements = sameGroup.filter(p => p.anchor[2] === 0);
+  let frontRowMinX = Infinity;
+  for (const gp of palletFloorPlacements) {
+    if (gp.anchor[0] < frontRowMinX) frontRowMinX = gp.anchor[0];
+  }
+  const FRONT_ROW_TOL = 5;
+  const frontRowBaseYs = Number.isFinite(frontRowMinX)
+    ? palletFloorPlacements
+        .filter(p => Math.abs(p.anchor[0] - frontRowMinX) <= FRONT_ROW_TOL)
+        .map(p => p.anchor[1])
+    : [];
+  const totalMass = existing.reduce((sum, p) => sum + (p.piece.weight_kg || 0), 0);
+  const weightedCenterY = existing.reduce((sum, p) => sum + (p.piece.weight_kg || 0) * (p.anchor[1] + p.size[1] / 2), 0);
+  const vehicleCenterY = vehicle.cargo_space.width / 2;
+  const centerOffsetBefore = totalMass > 0 ? Math.abs(weightedCenterY / totalMass - vehicleCenterY) : 0;
   // Build footprint height map for balancing identical columns (x,y footprint base)
   const footprintHeights = new Map<string, number>();
   for (const gp of sameGroup) {
@@ -172,6 +186,36 @@ export function buildPlacementCandidates(
             }
           }
         }
+
+        // Front-row mirror context for pallets (symmetry across vehicle longitudinal axis)
+        let isFrontRowCandidate = false;
+        let mirrorTargetY: number | undefined;
+        let effectiveFrontRow = Number.isFinite(frontRowMinX) ? frontRowMinX : undefined;
+        if (/pallet/i.test(piece.cargo_id)) {
+          if (anchor[2] === 0) {
+            if (effectiveFrontRow === undefined) {
+              effectiveFrontRow = anchor[0];
+            }
+            const rowTol = Math.max(FRONT_ROW_TOL, size[0] * 0.1);
+            if (Math.abs(anchor[0] - (effectiveFrontRow ?? anchor[0])) <= rowTol) {
+              isFrontRowCandidate = true;
+            }
+            if (isFrontRowCandidate && frontRowBaseYs.length === 1) {
+              const mirrored = zones.width - size[1] - frontRowBaseYs[0];
+              mirrorTargetY = mirrored;
+            }
+          }
+        }
+
+        // Center-of-mass offset after placing this candidate (all cargo types)
+        const candidateWeight = piece.weight_kg || 0;
+        const candidateCenterY = anchor[1] + size[1] / 2;
+        const newTotalMass = totalMass + candidateWeight;
+        const weightedWithCandidate = weightedCenterY + candidateWeight * candidateCenterY;
+        const centerOffsetAfter = newTotalMass > 0
+          ? Math.abs(weightedWithCandidate / newTotalMass - vehicleCenterY)
+          : centerOffsetBefore;
+
         // Pallet row stats (only build when pallet cargo)
         let palletRowCounts: Map<number, number> | undefined;
         let firstIncompleteRowX: number | undefined;
@@ -218,6 +262,11 @@ export function buildPlacementCandidates(
           firstIncompleteRowX,
           isStartingNewRow,
           candidateRowX,
+          frontRowBaseYs,
+          isFrontRowCandidate,
+          mirrorTargetY,
+          centerOffsetBefore,
+          centerOffsetAfter,
         }, config.groupGapRatio * zones.width);
 
         candidates.push({ anchor, size, orientation: ori, score, freeRef: free, dims });

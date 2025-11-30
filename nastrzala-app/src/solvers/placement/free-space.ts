@@ -33,21 +33,53 @@ export function fitsInFreeBox(
 // Preserve original split logic inline (no separate file yet) if import failed.
 export function splitFreeBox(
   free: FreeBox,
-  dims: { dx: number; dy: number; dz: number }
+  anchor: [number, number, number],
+  size: [number, number, number]
 ): FreeBox[] {
-  const { dx, dy, dz } = dims;
-  const sx = free.max.x - free.min.x;
-  const sy = free.max.y - free.min.y;
-  const sz = free.max.z - free.min.z;
-  const { x, y, z } = free.min;
-  const result: FreeBox[] = [];
-  const rx = sx - dx;
-  const ry = sy - dy;
-  const rz = sz - dz;
-  if (rx > 0) result.push({ min: { x: x + dx, y, z }, max: { x: free.max.x, y: free.max.y, z: free.max.z } });
-  if (ry > 0) result.push({ min: { x, y: y + dy, z }, max: { x: x + dx, y: free.max.y, z: free.max.z } });
-  if (rz > 0) result.push({ min: { x, y, z: z + dz }, max: { x: x + dx, y: y + dy, z: free.max.z } });
-  return result;
+  const boxes: FreeBox[] = [];
+  const [px, py, pz] = anchor;
+  const [dx, dy, dz] = size;
+  const px2 = px + dx;
+  const py2 = py + dy;
+  const pz2 = pz + dz;
+  const { min, max } = free;
+
+  const pushBox = (minBox: FreeBox["min"], maxBox: FreeBox["max"]) => {
+    if (maxBox.x - minBox.x <= 0 || maxBox.y - minBox.y <= 0 || maxBox.z - minBox.z <= 0) return;
+    boxes.push({ min: minBox, max: maxBox });
+  };
+
+  // Regions along X (left/right of placed block)
+  if (px > min.x) {
+    pushBox({ x: min.x, y: min.y, z: min.z }, { x: px, y: max.y, z: max.z });
+  }
+  if (px2 < max.x) {
+    pushBox({ x: px2, y: min.y, z: min.z }, { x: max.x, y: max.y, z: max.z });
+  }
+
+  const xMin = Math.max(px, min.x);
+  const xMax = Math.min(px2, max.x);
+
+  // Regions along Y (behind/in front of placed block footprint)
+  if (py > min.y) {
+    pushBox({ x: xMin, y: min.y, z: min.z }, { x: xMax, y: py, z: max.z });
+  }
+  if (py2 < max.y) {
+    pushBox({ x: xMin, y: py2, z: min.z }, { x: xMax, y: max.y, z: max.z });
+  }
+
+  const yMin = Math.max(py, min.y);
+  const yMax = Math.min(py2, max.y);
+
+  // Regions above/below the placed block footprint
+  if (pz > min.z) {
+    pushBox({ x: xMin, y: yMin, z: min.z }, { x: xMax, y: yMax, z: pz });
+  }
+  if (pz2 < max.z) {
+    pushBox({ x: xMin, y: yMin, z: pz2 }, { x: xMax, y: yMax, z: max.z });
+  }
+
+  return boxes;
 }
 
 /**
@@ -76,7 +108,7 @@ export function placePieceInFreeSpace(
   }
   const placement: SolverItemPlacement = { piece, orientation: chosen.orientation as any, anchor: chosen.anchor, size: chosen.size };
   original.splice(freeIndex, 1);
-  const splits = splitFreeBox(chosen.freeRef, chosen.dims);
+  const splits = splitFreeBox(chosen.freeRef, chosen.anchor, chosen.size);
   for (const fb of splits) original.push(fb);
   return { placement, updatedFreeBoxes: original };
 }

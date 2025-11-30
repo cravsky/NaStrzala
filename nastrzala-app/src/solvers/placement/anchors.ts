@@ -43,10 +43,14 @@ export function generateAnchors(ctx: AnchorContext): [number, number, number][] 
     const floorBases = sameGroup.filter(p => p.anchor[2] === 0);
     if (floorBases.length === 1) {
       const base = floorBases[0];
-      const targetX = base.anchor[0] + base.size[0];
-      // Only add if fits entirely in current free box footprint at floor level
-      if (targetX + dims.dx <= free.max.x && targetX >= free.min.x) {
-        anchors.push([targetX, base.anchor[1], free.min.z]);
+      const mirrorY = zones.width - dims.dy - base.anchor[1];
+      const targetX = base.anchor[0];
+      if (
+        mirrorY >= free.min.y && mirrorY + dims.dy <= free.max.y &&
+        targetX >= free.min.x && targetX + dims.dx <= free.max.x &&
+        free.min.z <= base.anchor[2] && base.anchor[2] + dims.dz <= free.max.z
+      ) {
+        anchors.push([targetX, mirrorY, free.min.z]);
       }
     }
   }

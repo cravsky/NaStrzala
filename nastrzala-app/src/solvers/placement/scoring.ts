@@ -26,6 +26,12 @@ export interface ScoreContext {
   firstIncompleteRowX?: number; // smallest X row whose count < maxColumns
   isStartingNewRow?: boolean; // candidate would start a new X row
   candidateRowX?: number; // X of candidate row (floor level)
+  // Pallet mirror symmetry (left/right around longitudinal axis)
+  frontRowBaseYs?: number[]; // Y positions of existing front-row bases (min X)
+  isFrontRowCandidate?: boolean;
+  mirrorTargetY?: number; // desired mirrored Y for symmetry
+  centerOffsetBefore?: number; // current center-of-mass offset along width before placement
+  centerOffsetAfter?: number; // projected offset after placement
 }
 
 // Weight constants (initial calibration; may be tuned later)
@@ -54,11 +60,20 @@ const W_FILL_INCOMPLETE_ROW = 260; // strong reward for filling second column in
 const P_SKIP_INCOMPLETE_ROW = -500; // penalty for starting deeper row while front row incomplete
 const P_STACK_BEFORE_ROW_FILLED = -140; // discourage vertical stacking before row complete
 const W_START_NEW_ROW_AFTER_FILLED = 120; // reward starting new row only after previous filled
+// Mirror symmetry weights (pallet specific)
+const W_MIRROR_MATCH = 900; // strong reward for matching mirrored Y position
+const P_MIRROR_MISS = -900; // heavy penalty for deviating from mirrored Y when expected
+const P_STACK_BEFORE_MIRROR = -4500; // very strong penalty stacking before mirrored pair completed
+// Center-of-mass symmetry weights (all cargo)
+const P_CENTER_OFFSET = -0.25; // penalty scale per mm offset from center
+const W_CENTER_IMPROVE = 0.35; // reward per mm improvement toward center
 
 export function computePlacementScore(ctx: ScoreContext, preferredGap: number): number {
   const { piece, anchor, size, zones, sameGroup, clusterDistance, stackingOnSameFootprint,
     newFootprint, distinctFootprints, currentFootprintHeight, minColumnHeight, maxColumnHeight, heightSpreadAfter, maxColumns,
-    palletRowCounts, firstIncompleteRowX, isStartingNewRow, candidateRowX } = ctx;
+    palletRowCounts, firstIncompleteRowX, isStartingNewRow, candidateRowX,
+    frontRowBaseYs, isFrontRowCandidate, mirrorTargetY,
+    centerOffsetBefore = 0, centerOffsetAfter = 0 } = ctx;
   let score = 0;
 
   const floor = isInFloor(anchor[2], size[2], zones);
@@ -99,11 +114,11 @@ export function computePlacementScore(ctx: ScoreContext, preferredGap: number): 
     // Row layering logic (only consider floor-level placements for row fill decisions)
     if (anchor[2] === 0 && typeof maxColumns === "number" && palletRowCounts) {
       if (typeof firstIncompleteRowX === "number") {
-        const rowCount = palletRowCounts.get(candidateRowX || anchor[0]) || 0;
+        const rowCount = palletRowCounts.get(candidateRowX ?? anchor[0]) || 0;
         const rowComplete = rowCount >= maxColumns;
         if (!rowComplete) {
           // Filling existing incomplete row (same X as firstIncompleteRowX) -> big bonus
-          if (candidateRowX === firstIncompleteRowX && !newFootprint) {
+          if (candidateRowX === firstIncompleteRowX && newFootprint) {
             score += W_FILL_INCOMPLETE_ROW;
           }
           // Starting deeper row while front row incomplete -> penalty
@@ -143,6 +158,23 @@ export function computePlacementScore(ctx: ScoreContext, preferredGap: number): 
         score += P_DELAY_SECOND_COLUMN;
       }
     }
+
+    // Mirror symmetry incentives for front row (min X) bases
+    if (isFrontRowCandidate && frontRowBaseYs && frontRowBaseYs.length === 1 && typeof mirrorTargetY === "number") {
+      const delta = Math.abs(anchor[1] - mirrorTargetY);
+      const tol = Math.max(10, size[1] * 0.1);
+      if (delta <= tol) {
+        score += W_MIRROR_MATCH;
+      } else {
+        const penaltyFactor = Math.min(delta / Math.max(size[1], 1), 1.5);
+        score += P_MIRROR_MISS * penaltyFactor;
+      }
+    }
+
+    // Discourage stacking before mirror pair completed on front row
+    if (stackingOnSameFootprint && frontRowBaseYs && frontRowBaseYs.length < 2) {
+      score += P_STACK_BEFORE_MIRROR;
+    }
   }
 
   // Adjacency bonus
@@ -151,6 +183,14 @@ export function computePlacementScore(ctx: ScoreContext, preferredGap: number): 
   // Compact clustering: penalize if distance exceeds preferred gap (if gap > 0)
   if (preferredGap > 0 && clusterDistance > preferredGap * 1.5 && clusterDistance < Infinity) {
     score += P_EXCESS_GAP;
+  }
+
+  // Center-of-mass symmetry penalty/reward (applies to all cargo)
+  if (centerOffsetAfter >= 0) {
+    score += P_CENTER_OFFSET * centerOffsetAfter;
+    if (centerOffsetBefore > centerOffsetAfter) {
+      score += W_CENTER_IMPROVE * (centerOffsetBefore - centerOffsetAfter);
+    }
   }
 
   // Mild spatial bias: encourage rear-left-lower (tie-break shaping)
