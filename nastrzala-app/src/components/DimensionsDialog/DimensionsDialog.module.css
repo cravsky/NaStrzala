@@ -26,9 +26,9 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  max-width: 1100px;
+  max-width: 1400px;
   width: 100%;
-  max-height: 90vh;
+  max-height: 95vh;
   display: flex;
   flex-direction: column;
   animation: slideUp 0.3s ease;
@@ -97,8 +97,8 @@
 }
 
 .visualizationContainer {
-  min-height: 400px;
-  max-height: 500px;
+  min-height: 500px;
+  max-height: 650px;
 }
 
 .infoPanel {

@@ -1,11 +1,23 @@
+import { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import VanModel from './VanModel';
 import styles from './VanVisualization.module.css';
 
 export default function VanVisualization({ vehicle, placements, cargoLength, cargoWidth, cargoHeight }) {
+  const [showObstacles, setShowObstacles] = useState(true);
   return (
     <div className={styles.container}>
+      <div className={styles.controls}>
+        <label>
+          <input
+            type="checkbox"
+            checked={showObstacles}
+            onChange={(e) => setShowObstacles(e.target.checked)}
+          />{' '}
+          Show wheel arches & obstacles
+        </label>
+      </div>
       <Canvas shadows>
         <PerspectiveCamera makeDefault position={[5, 3, 5]} />
         <OrbitControls
@@ -32,6 +44,7 @@ export default function VanVisualization({ vehicle, placements, cargoLength, car
           cargoLength={cargoLength}
           cargoWidth={cargoWidth}
           cargoHeight={cargoHeight}
+          showObstacles={showObstacles}
         />
 
         <gridHelper args={[20, 20]} position={[0, 0, 0]} />

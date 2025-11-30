@@ -1,155 +1,126 @@
 // solver-types.ts
+// Type definitions for the NaStrzala 3D packing solver (MVP).
 
-/**
- * Supported length units for the solver.
- * Currently only "mm" is used, but the type is kept open for future extension.
- */
-export type LengthUnit = "mm";
+import type { LengthUnit } from "./units";
+import type { CargoRequestItem, CargoPiece } from "./cargo-types";
+import type { VehicleDefinition } from "./vehicle-types";
 
 /**
  * Orientation index (0–5) representing how the original cargo dimensions
  * (L, W, H) are mapped to the vehicle coordinate system (X, Y, Z).
  *
- * Example mapping table:
+ * Example mapping:
  * 0: L -> X, W -> Y, H -> Z
  * 1: L -> X, H -> Y, W -> Z
  * 2: W -> X, L -> Y, H -> Z
  * 3: W -> X, H -> Y, L -> Z
  * 4: H -> X, L -> Y, W -> Z
  * 5: H -> X, W -> Y, L -> Z
+ *
+ * Solver uses only axis-aligned rotations (0° / 90°).
  */
 export type OrientationIndex = 0 | 1 | 2 | 3 | 4 | 5;
 
 /**
- * Single cargo type request: a cargo_id and the requested quantity.
+ * Simple 3D vector type in solver coordinates (millimetres).
  */
-export interface CargoRequestItem {
-  cargo_id: string;
-  quantity: number;
+export interface Vec3 {
+  x: number;
+  y: number;
+  z: number;
 }
 
 /**
- * Optional configuration options controlling solver behavior.
+ * Axis-aligned rectangular block of free space inside the vehicle.
+ * Used internally by the packing algorithm (free-space splitting).
  */
-export interface SolverOptions {
-  /** Maximum number of trips the solver is allowed to produce. */
-  max_trips?: number;
-
-  /** Objective function to optimize. */
-  objective?: "max_fill" | "min_trips" | "balanced";
-
-  /** Whether the solver is allowed to return a partial solution. */
-  allow_partial?: boolean;
+export interface FreeBox {
+  /** Lower–rear–left corner (x, y, z) in mm. */
+  min: Vec3;
+  /** Upper–front–right corner (x, y, z) in mm (exclusive). */
+  max: Vec3;
 }
 
 /**
- * Input payload provided to the solver.
- *
- * The solver loads:
- * - vehicle geometry from:   vehicle_id
- * - cargo definitions from:  cargo_id
- *
- * The input does NOT need to include any geometry of the vehicle
- * (wheel arches, obstacles, dimensions). Those come from the vehicle JSON.
+ * Solver status:
+ * - "ok"      = all requested items fit within the available trips,
+ * - "partial" = some items did not fit,
+ * - "no_fit"  = no item could be placed.
  */
-export interface SolverRequest {
-  vehicle_id: string;
-  unit: LengthUnit; // always "mm"
-
-  cargo_items: CargoRequestItem[];
-
-  options?: SolverOptions;
-}
+export type SolverStatus = "ok" | "partial" | "no_fit";
 
 /**
- * High-level solver result status.
- */
-export type SolverStatus = "ok" | "partial" | "no_fit" | "error";
-
-/**
- * Per-cargo summary for the final solution.
- */
-export interface PerCargoSummary {
-  cargo_id: string;
-  requested: number;
-  placed: number;
-}
-
-/**
- * Summary for cargo units that could not be placed.
- */
-export interface UnplacedSummary {
-  cargo_id: string;
-  count: number;
-
-  /** Reason for non-placement. Solver may extend this list in the future. */
-  reason: "no_space" | "too_long" | "too_high" | "error";
-}
-
-/**
- * Aggregated summary of the solver result.
+ * Summary statistics of the packing result.
  */
 export interface SolverSummary {
-  /** How many trips were generated. */
-  trips: number;
+  /** Total number of pieces requested (expanded from quantities). */
+  total_pieces: number;
 
-  total_items_requested: number;
-  total_items_placed: number;
+  /** Number of placed pieces across all trips. */
+  placed_pieces: number;
 
-  per_cargo: PerCargoSummary[];
+  /** Number of unplaced pieces. */
+  unplaced_pieces: number;
 
-  /** High-level description of items that could not be placed. */
-  unplaced: UnplacedSummary[];
+  /** Number of trips that were actually used. */
+  trips_used: number;
 }
 
 /**
- * A single placed cargo item, representing a 3D oriented box.
- *
- * This is the minimal required dataset for:
- * - packing algorithms
- * - collision detection
- * - visualization in a 3D engine
+ * High-level request for the solver.
+ * The caller is responsible for providing:
+ * - full vehicle geometry
+ * - list of requested cargo types with quantities
+ */
+export interface SolverRequest {
+  /** Units used for all geometry (must match vehicle + cargo presets). */
+  unit: LengthUnit;
+
+  /** Vehicle definition, including cargo space and obstacles. */
+  vehicle: VehicleDefinition;
+
+  /** Requested cargo items with quantities. */
+  items: CargoRequestItem[];
+
+  /**
+   * Optional maximum number of trips.
+   * If omitted, solver may assume a reasonable default (e.g. 1).
+   */
+  max_trips?: number;
+}
+
+/**
+ * A single placed cargo piece within the vehicle.
  */
 export interface SolverItemPlacement {
-  /** Cargo type identifier matching the cargo definition file. */
-  cargo_id: string;
+  /** The physical piece that was placed (for visualization & reporting). */
+  piece: CargoPiece;
+
+  /** Orientation index chosen for this piece. */
+  orientation: OrientationIndex;
 
   /**
    * Lower–rear–left corner of the placed box in vehicle coordinates.
-   * Represented as [x, y, z] in the unit system (mm).
+   * Represented as [x, y, z] in millimetres.
    */
   anchor: [number, number, number];
 
   /**
    * Box dimensions after orientation is applied.
-   * Represented as [dx, dy, dz] aligned with vehicle axes.
+   * Represented as [dx, dy, dz] aligned with vehicle axes (mm).
    */
   size: [number, number, number];
-
-  /**
-   * Orientation index (0–5) describing how the original (L, W, H)
-   * map to (X, Y, Z). Useful for advanced constraints (“do not place on the smallest face”, etc.)
-   */
-  orientation: OrientationIndex;
-
-  /**
-   * (Optional) Index of the cargo entry in the input array.
-   * Useful for reconstructing per-input grouping.
-   */
-  source_index?: number;
-
-  /**
-   * (Optional) The sequential number (1..quantity) for this cargo type.
-   */
-  sequence_in_cargo?: number;
 }
 
 /**
- * A single trip (loading attempt).
- * The solver may return 1 or more trips depending on settings.
+ * A single trip (one full loading of the cargo space).
+ * The solver may return one or more trips depending on max_trips.
  */
 export interface SolverTrip {
+  /** Zero-based trip index. */
   index: number;
+
+  /** Placements of all pieces that fit into this trip. */
   items: SolverItemPlacement[];
 }
 
@@ -157,14 +128,19 @@ export interface SolverTrip {
  * Full solver response, containing layout + statistics.
  */
 export interface SolverResponse {
-  vehicle_id: string;
+  /** Unit used for all geometry in this result (normally "mm"). */
   unit: LengthUnit;
 
+  /** ID of the vehicle used for packing (copied from VehicleDefinition). */
+  vehicle_id: string;
+
+  /** High-level result status: all / some / none placed. */
   status: SolverStatus;
 
   /** Optional human-readable summary message. */
   message?: string;
 
+  /** Numeric summary of what was placed / not placed. */
   summary: SolverSummary;
 
   /** Complete set of trips and their placements. */

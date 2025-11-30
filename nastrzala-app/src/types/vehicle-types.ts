@@ -1,85 +1,85 @@
 // vehicle-types.ts
+// Vehicle geometry models for NaStrzala (MVP)
+//
+// This file describes the 3D loading space of a vehicle,
+// including the cargo compartment, wheel arches and other obstacles.
+
+import type { LengthUnit } from "./units";
 
 /**
- * Supported length units for all vehicle geometry.
- * Currently only "mm" is used.
- */
-export type LengthUnit = "mm";
-
-/**
- * A general axis-aligned box in vehicle coordinates.
- * Used for wheel arches, obstacles, internal fixtures, etc.
+ * Axis-aligned bounding box in vehicle coordinates.
+ * position = lower–rear–left corner (x, y, z) relative to origin.
+ * size     = [length, width, height].
  */
 export interface AABB {
   /** Lower–rear–left corner (x, y, z). */
   position: [number, number, number];
 
-  /** Dimensions aligned with vehicle axes: [dx, dy, dz]. */
+  /** Size along axes (length, width, height). */
   size: [number, number, number];
 }
 
 /**
- * Cargo space dimensions of a vehicle.
- * Defines the internal usable loading area, not including obstacles.
+ * Main cargo space dimensions (inner usable volume).
  */
 export interface CargoSpace {
-  /** Internal length (X axis) in mm. */
+  /** Internal usable length of the cargo space (X axis). */
   length: number;
 
-  /** Internal width (Y axis) in mm. */
+  /** Internal usable width (Y axis). */
   width: number;
 
-  /** Internal height (Z axis) in mm. */
+  /** Internal usable height (Z axis). */
   height: number;
 }
 
 /**
- * Wheel arch definition.
- * Typically two wheel arches exist, but the type supports any count.
+ * Wheel arch definition, represented as an AABB.
+ * Most vehicles have two wheel arches, but any count is allowed.
  */
 export interface WheelArch extends AABB {
-  /** Optional human-readable label, e.g., "left wheel arch". */
+  /** Optional descriptive label ("left", "right", etc.). */
   label?: string;
 }
 
 /**
- * Optional vehicle obstacles that should be excluded from cargo volume.
- * Examples: shelves, railings, beams, sliding door intrusions, etc.
+ * Any fixed obstacle inside the cargo compartment, blocking cargo.
  */
 export interface VehicleObstacle extends AABB {
-  /** Optional tag/class for debugging or visualization. */
+  /** Optional kind tag for debugging or UI. */
   kind?: "wheel_arch" | "shelf" | "beam" | "door_intrusion" | string;
 }
 
 /**
- * Full vehicle definition loaded by the solver using vehicle_id.
+ * Full vehicle definition used by the solver.
+ * Matches the JSON presets stored in NaStrzala.
  */
 export interface VehicleDefinition {
-  /** Vehicle unique ID used by the solver (e.g., "sprinter_l2h2"). */
+  /** Unique vehicle ID (e.g. "sprinter_l2h2"). */
   vehicle_id: string;
 
-  /** Unit system (always "mm"). */
+  /** Unit used for all geometry: normally "mm". */
   unit: LengthUnit;
 
-  /** Internal usable cargo space (not including obstacles). */
+  /** Usable cargo space volume (excluding obstacles). */
   cargo_space: CargoSpace;
 
-  /**
-   * Wheel arches represented as AABB boxes.
-   * Solver must ensure no cargo intersects any wheel arch.
-   */
+  /** Wheel arches represented as AABB obstacles. */
   wheel_arches: WheelArch[];
 
-  /**
-   * Any additional fixed obstacles inside the loading compartment.
-   * All are treated as forbidden volumes for cargo placement.
-   */
+  /** Additional fixed obstacles inside the loading compartment. */
   obstacles?: VehicleObstacle[];
 
   /**
-   * Optional origin definition.
-   * For most vehicles: "rear_left_floor_inside".
-   * Included for completeness and future extensibility.
+   * Origin definition for coordinates.
+   * NaStrzala uses: "rear_left_floor_inside"
    */
-  origin?: string;
+  origin?: "rear_left_floor_inside" | string;
+
+  /**
+   * Optional UI metadata (not used by solver).
+   */
+  brand?: string;
+  model?: string;
+  variant?: string;
 }
