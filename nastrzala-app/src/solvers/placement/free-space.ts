@@ -49,6 +49,22 @@ export function splitFreeBox(
     boxes.push({ min: minBox, max: maxBox });
   };
 
+  // Korekta: jeśli umieszczany element jest pionową płytą, dziel tylko wzdłuż Y
+  // Rozpoznaj pionową płytę po wymiarach: bardzo mała wysokość (dz) względem długości/szerokości
+  const isVerticalPlate = dy <= 80 && dx >= 1000 && dz >= 800;
+  if (isVerticalPlate) {
+    // Generuj sekwencję boxów wzdłuż Y na sloty dla kolejnych płyt
+    const plateWidth = dy;
+    for (let y = min.y; y + plateWidth <= max.y; y += plateWidth) {
+      // Jeśli slot nie jest zajęty przez aktualnie umieszczaną płytę
+      if (y < py || y >= py2) {
+        pushBox({ x: min.x, y: y, z: min.z }, { x: max.x, y: y + plateWidth, z: max.z });
+      }
+    }
+    // Nie dziel wzdłuż X ani Z
+    return boxes;
+  }
+  // ...oryginalna logika dla pozostałych przypadków...
   // Regions along X (left/right of placed block)
   if (px > min.x) {
     pushBox({ x: min.x, y: min.y, z: min.z }, { x: px, y: max.y, z: max.z });

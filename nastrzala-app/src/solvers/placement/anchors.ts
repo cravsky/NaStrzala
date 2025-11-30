@@ -53,6 +53,14 @@ export function generateAnchors(ctx: AnchorContext): [number, number, number][] 
   }
 
   if (piece.flags.vertical) {
+    // Dodaj anchory wzdłuż Y, od free.min.y do free.max.y, co dims.dy
+    for (let y = free.min.y; y + dims.dy <= free.max.y; y += dims.dy) {
+      // Ogranicz anchor do przestrzeni free boxa
+      if (y >= free.min.y && y + dims.dy <= free.max.y) {
+        anchors.push([free.min.x, y, free.min.z]);
+      }
+    }
+    // Zachowaj też dotychczasowe warianty (środek, pas środkowy)
     const centerBandMin = zones.width * 0.35;
     const centerBandMax = zones.width * 0.65 - dims.dy;
     const bandStart = Math.max(centerBandMin, free.min.y);

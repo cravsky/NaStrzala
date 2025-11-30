@@ -159,21 +159,7 @@ export function buildPlacementCandidates(
 			for (const rawAnchor of anchors) {
 				let anchor: [number, number, number] = rawAnchor;
 				if (piece.flags.vertical) {
-					let shiftedX = anchor[0];
-					if (shiftedX < verticalMinX) shiftedX = Math.max(verticalMinX, free.min.x);
-					const candidateMinY = anchor[1];
-					const candidateMaxY = anchor[1] + size[1];
-					for (const obs of floorObstacles) {
-						if (candidateMaxY <= obs.minY || candidateMinY >= obs.maxY) {
-							continue;
-						}
-						if (shiftedX + size[0] <= obs.start) break;
-						if (shiftedX < obs.end && shiftedX + size[0] > obs.start) {
-							shiftedX = obs.end + 5;
-						}
-					}
-					if (shiftedX + size[0] > free.max.x) continue;
-					anchor = [shiftedX, anchor[1], anchor[2]];
+					anchor = [free.min.x, anchor[1], anchor[2]];
 				}
 				if (!anchorInsideFree(free, anchor, size)) continue;
 				if (

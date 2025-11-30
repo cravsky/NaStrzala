@@ -15,8 +15,8 @@ export function getAllowedOrientationsForPiece(piece: CargoPiece): OrientationIn
   const ALL: OrientationIndex[] = [0, 1, 2, 3, 4, 5];
 
   if (piece.flags.vertical) {
-    // H must map to Z → indices 0 and 2
-    return [0, 2];
+    // Wymuszamy pionową orientację: L→X, H→Y, W→Z (indeks 1)
+    return [1];
   }
 
   if (!piece.flags.allowRotations) {
