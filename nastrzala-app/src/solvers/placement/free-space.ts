@@ -84,8 +84,17 @@ export function placePieceInFreeSpace(
 
   const orientations = getAllowedOrientationsForPiece(piece);
 
-  // Sort boxes: prefer lower, more rear-left positions (Z, Y, X priority)
+  // Sort boxes based on piece preference.
+  // Default: prefer lower, rear-left positions (Z, Y, X).
+  // For vertical appliances (e.g., refrigerators, washing machines), prefer bulkhead/front-first (max Y),
+  // still keeping low Z, then left X to cluster them together.
+  const preferFrontForVertical = piece.flags.vertical === true;
   const sorted = [...freeBoxes].sort((a, b) => {
+    if (preferFrontForVertical) {
+      if (a.min.z !== b.min.z) return a.min.z - b.min.z; // lower first
+      if (a.max.y !== b.max.y) return b.max.y - a.max.y; // front (bulkhead) first
+      return a.min.x - b.min.x; // left first
+    }
     if (a.min.z !== b.min.z) return a.min.z - b.min.z;
     if (a.min.y !== b.min.y) return a.min.y - b.min.y;
     return a.min.x - b.min.x;

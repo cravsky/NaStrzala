@@ -28,6 +28,11 @@ export function sortByPriority(pieces: CargoPiece[]): CargoPiece[] {
     const bucketDiff = packingPriorityBucket(a) - packingPriorityBucket(b);
     if (bucketDiff !== 0) return bucketDiff;
 
+    // Prefer pallet-like items within the same bucket (base layer positioning)
+    const aIsPallet = /pallet/i.test(a.cargo_id);
+    const bIsPallet = /pallet/i.test(b.cargo_id);
+    if (aIsPallet !== bIsPallet) return aIsPallet ? -1 : 1;
+
     // Within same bucket: heavier first (keeps weight low)
     if (a.weight_kg !== b.weight_kg) {
       return b.weight_kg - a.weight_kg;

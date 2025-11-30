@@ -22,28 +22,37 @@ export function packSingleTrip(
   pieces: CargoPiece[]
 ): TripPackingResult {
   const placements: SolverItemPlacement[] = [];
-  const remaining: CargoPiece[] = [];
-
   if (pieces.length === 0) {
-    return { placements, remaining };
+    return { placements, remaining: [] };
   }
 
   let freeBoxes = initializeFreeSpace(vehicle);
+  let remaining: CargoPiece[] = pieces.slice();
+  let progress = true;
 
-  for (const piece of pieces) {
-    const { placement, updatedFreeBoxes } = placePieceInFreeSpace(
-      piece,
-      freeBoxes,
-      placements
-    );
+  // Iteratively attempt to place remaining pieces until no further progress
+  while (progress && remaining.length > 0) {
+    progress = false;
+    const nextRemaining: CargoPiece[] = [];
 
-    if (!placement) {
-      remaining.push(piece);
-      continue;
+    for (const piece of remaining) {
+      const { placement, updatedFreeBoxes } = placePieceInFreeSpace(
+        piece,
+        freeBoxes,
+        placements
+      );
+
+      if (!placement) {
+        nextRemaining.push(piece);
+        continue;
+      }
+
+      placements.push(placement);
+      freeBoxes = updatedFreeBoxes;
+      progress = true;
     }
 
-    placements.push(placement);
-    freeBoxes = updatedFreeBoxes;
+    remaining = nextRemaining;
   }
 
   return { placements, remaining };
