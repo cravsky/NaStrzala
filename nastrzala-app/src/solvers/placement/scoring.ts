@@ -60,6 +60,7 @@ const W_STACK_CONTINUE_FRONT = 20;
 const W_VERTICAL_CENTER = 320;
 const P_VERTICAL_CENTER_MISS = -280;
 const P_BOX_STACK_CENTER_LOCK = -260;
+const P_PALLET_CENTER_OCCUPY = -600;
 // Column balancing weights (pallet-specific heuristics)
 const P_NEW_COLUMN_EXCESS = -400; // escalated penalty (kept for safety though we now hard cap)
 const P_COLUMN_IMBALANCE = -120; // stronger penalty for widening spread
@@ -95,6 +96,9 @@ export function computePlacementScore(ctx: ScoreContext, preferredGap: number): 
   const wall = wallAdjacency(anchor[1], size[1], zones);
   const upper = !floor;
   const centerX = anchor[0] + size[0] / 2;
+  const centerY = anchor[1] + size[1] / 2;
+  const centerBandMin = zones.width * 0.35;
+  const centerBandMax = zones.width * 0.65;
   // Bulkhead confirmed at minX: treat first 40% of length as front region
   const frontThreshold = zones.length * 0.4; // front region upper bound (minX .. frontThreshold)
 
@@ -143,6 +147,9 @@ export function computePlacementScore(ctx: ScoreContext, preferredGap: number): 
   if (piece.meta.weightClass === "HEAVY" && upper) score += P_HEAVY_HIGH;
   if (piece.meta.weightClass === "HEAVY" && centerX <= frontThreshold) score += W_FRONT_HEAVY;
   if (/pallet/i.test(piece.cargo_id) && centerX <= frontThreshold) score += W_FRONT_PALLET;
+  if (/pallet/i.test(piece.cargo_id) && centerY >= centerBandMin && centerY <= centerBandMax) {
+    score += P_PALLET_CENTER_OCCUPY;
+  }
   if (piece.meta.weightClass === "LIGHT" && upper) score += W_LIGHT_UPPER;
 
   // Vertical stacking continuation bonuses

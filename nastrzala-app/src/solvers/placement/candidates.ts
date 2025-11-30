@@ -55,6 +55,7 @@ export function buildPlacementCandidates(
   const orientations = getAllowedOrientationsForPiece(piece);
   const sameGroup = existing.filter(p => p.piece.cargo_id === piece.cargo_id && p.piece.meta.behavior === piece.meta.behavior);
   const floorPlacements = sameGroup.filter(p => p.anchor[2] === 0);
+  const existingFloor = existing.filter(p => p.anchor[2] === 0);
   let frontRowMinX = Infinity;
   for (const gp of floorPlacements) {
     if (gp.anchor[0] < frontRowMinX) frontRowMinX = gp.anchor[0];
@@ -72,9 +73,21 @@ export function buildPlacementCandidates(
   const baseRowWidth = piece.meta.dims_mm.width;
   const frontRowCapacity = Math.min(2, Math.max(1, Math.floor(vehicle.cargo_space.width / baseRowWidth)));
   const frontRowIncomplete = frontRowEntries.length < frontRowCapacity;
+  const hasAnyFloor = existingFloor.length > 0;
+  const walkwayStartX = hasAnyFloor
+    ? (Number.isFinite(frontRowMinX) ? frontRowMinX : 0) + frontRowThickness + 5
+    : 0;
+  const occupiedDepthX = hasAnyFloor
+    ? existingFloor.reduce((max, fp) => Math.max(max, fp.anchor[0] + fp.size[0]), 0)
+    : 0;
+  const verticalMinX = hasAnyFloor ? Math.max(walkwayStartX, occupiedDepthX + 5) : 0;
+  const floorObstacles = hasAnyFloor
+    ? existingFloor
+        .map(fp => ({ start: fp.anchor[0], end: fp.anchor[0] + fp.size[0] }))
+        .sort((a, b) => a.start - b.start)
+    : [];
   const centerBandMin = zones.width * 0.35;
   const centerBandMax = zones.width * 0.65;
-  const walkwayStartX = (Number.isFinite(frontRowMinX) ? frontRowMinX : 0) + frontRowThickness + 5;
   const centerBandOccupied = existing.some(p => {
     if (!p.piece.flags.vertical) return false;
     if (p.anchor[2] !== 0) return false;
@@ -134,10 +147,17 @@ export function buildPlacementCandidates(
       const anchors = generateAnchors({ free, piece, dims, existing, zones, config });
       for (const rawAnchor of anchors) {
         let anchor: [number, number, number] = rawAnchor;
-        if (piece.flags.vertical && rawAnchor[0] < walkwayStartX) {
-          const shiftedX = Math.max(walkwayStartX, free.min.x);
+        if (piece.flags.vertical) {
+          let shiftedX = anchor[0];
+          if (shiftedX < verticalMinX) shiftedX = Math.max(verticalMinX, free.min.x);
+          for (const obs of floorObstacles) {
+            if (shiftedX + size[0] <= obs.start) break;
+            if (shiftedX < obs.end && shiftedX + size[0] > obs.start) {
+              shiftedX = obs.end + 5;
+            }
+          }
           if (shiftedX + size[0] > free.max.x) continue;
-          anchor = [shiftedX, rawAnchor[1], rawAnchor[2]];
+          anchor = [shiftedX, anchor[1], anchor[2]];
         }
         if (!anchorInsideFree(free, anchor, size)) continue;
         // Hard vehicle bounds guard (defensive) to prevent out-of-container placements.
