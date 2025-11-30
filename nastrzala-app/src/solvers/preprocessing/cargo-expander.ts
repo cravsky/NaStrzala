@@ -1,6 +1,6 @@
 // cargo-expander.ts
 // Stage 1: Expand cargo items into individual pieces with derived metadata
-// Corresponds to solver-rules.md §11 (computed categories: long, heavy/light)
+// Corresponds to docs/solver/solver-rules-mvp.md §11 (computed categories: long, heavy/light)
 
 import type {
   CargoDefinition,
@@ -12,7 +12,7 @@ import type {
 
 /**
  * Compute derived metadata for a cargo definition.
- * Uses heuristics from solver-rules.md:
+ * Uses heuristics from docs/solver/solver-rules-mvp.md:
  * - long: max_dim >= 3 * min_dim
  * - heavy/light: density thresholds
  */

@@ -1,6 +1,6 @@
 // space-initializer.ts
 // Stage 3: Initialize free space boxes and carve out obstacles
-// Implements solver-rules.md §8 (wheel arches)
+// Implements docs/solver/solver-rules-mvp.md §8 (wheel arches)
 
 import type { VehicleDefinition } from "../../types/vehicle-types";
 import type { FreeBox } from "../../types/solver-types";

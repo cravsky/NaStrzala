@@ -1,6 +1,6 @@
 // orientation.ts
 // Orientation calculation for cargo pieces
-// Implements solver-rules.md §6 (vertical) and §9 (rotations)
+// Implements docs/solver/solver-rules-mvp.md §6 (vertical) and §9 (rotations)
 
 import type { CargoPiece, CargoDimensions } from "../../types/cargo-types";
 import type { OrientationIndex } from "../../types/solver-types";

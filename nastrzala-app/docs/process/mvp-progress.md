@@ -67,7 +67,7 @@
 - [x] Optymalizacja wizualizacji (gap między pudłami, polygon offset)
 - [x] **Solver modularization** - 7 modułów (preprocessing, placement, packing)
 - [x] **Stage-by-stage logging** - debug output dla każdego etapu
-- [x] **Testing guide** - dokumentacja testowania modułów (TESTING-SOLVER-MODULES.md)
+- [x] **Testing guide** - dokumentacja testowania modułów (../contributing/solver-module-testing-guide.md)
 - [x] **Priority sorter** - 5-bucket sorting system
 - [x] **Support area calculation** - pełne wsparcie dla stosu
 - [x] **Density thresholds** - heavy (300 kg/m³), light (150 kg/m³)
@@ -118,7 +118,7 @@ src/solvers/
 ---
 
 ## 📋 Tydzień 4-8 (ZAPLANOWANE)
-Zobacz [harmonogram.md](harmonogram.md) dla pełnej listy zadań.
+Zobacz [roadmap.md](roadmap.md) dla pełnej listy zadań.
 
 ### Kluczowe kamienie milowe:
 - **Tydzień 4**: Solver - heurystyki, edge-case'y, kursy

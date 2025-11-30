@@ -1,6 +1,6 @@
 // priority-sorter.ts
 // Stage 2: Sort pieces by packing priority
-// Implements solver-rules.md §10
+// Implements docs/solver/solver-rules-mvp.md §10
 
 import type { CargoPiece } from "../../types/cargo-types";
 

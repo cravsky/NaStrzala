@@ -1,6 +1,6 @@
 // stacking.ts
 // Stacking validation logic
-// Implements solver-rules.md §4 (stackable) and §7 (fragile)
+// Implements docs/solver/solver-rules-mvp.md §4 (stackable) and §7 (fragile)
 
 import type { CargoPiece } from "../../types/cargo-types";
 import type { SolverItemPlacement } from "../../types/solver-types";

@@ -37,7 +37,7 @@ const DEBUG = true; // Set to false to disable stage logging
 ```
 📦 STAGE 1: Cargo Expansion — 5 pieces
 ────────────────────────────────────────────────
-euro_pallet#0             | 20kg | density: 144.7 kg/m³ | NO-ROTATE
+_euro_pallet#0             | 20kg | density: 144.7 kg/m³ | NO-ROTATE
 industrial_pallet#0       | 25kg | density: 144.9 kg/m³ | NO-ROTATE
 large_box#0               | 30kg | density: 166.7 kg/m³ | STANDARD
 washing_machine#0         | 70kg | density: 467.5 kg/m³ | HEAVY, FRAGILE, NON-STACKABLE

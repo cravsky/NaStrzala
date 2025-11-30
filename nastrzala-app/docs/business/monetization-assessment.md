@@ -115,4 +115,3 @@ Kluczem do sukcesu będzie:
 - rozsądna cena subskrypcji.
 
 Projekt ma niski poziom ryzyka i jasną ścieżkę skalowania.
-

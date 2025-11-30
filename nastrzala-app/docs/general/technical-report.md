@@ -151,4 +151,3 @@ Do ustalenia w kolejnym kroku.
 ## 10. Podsumowanie
 NaStrzala.com ma szansę stać się narzędziem pierwszego wyboru dla małych i średnich firm budowlanych planujących załadunek.  
 Połączenie prostoty, presetów, wizualizacji 3D i narzędzi technicznych (trasy, przeciążenie osi) daje projekt o wysokiej wartości użytkowej i komercyjnej.
-

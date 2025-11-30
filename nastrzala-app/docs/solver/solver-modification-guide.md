@@ -32,8 +32,8 @@ Poprawić heurystyki tak, aby **wynik wyglądał bardziej jak pakowanie przez cz
 1. **Nie zmieniaj publicznego API solvera** (`SolverRequest`, `SolverResponse`, typy w `solver-types.ts` itd.).
 2. Skup się na:
    - **kolejności** pakowania,
-   - **lokalnych heurystykach wyboru pozycji**,
-   - **grupowaniu ładunków tego samego typu**,
+   - **lokalnych heurystykach wyboru pozycji**, 
+   - **grupowaniu ładunków tego samego typu**, 
    - **preferowanych strefach** dla różnych klas ładunku.
 3. Zachowaj deterministyczność — **nie używaj losowości**.  
    Ten sam input → ten sam layout.

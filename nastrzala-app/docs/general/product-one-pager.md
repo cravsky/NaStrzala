@@ -33,4 +33,3 @@ Bo ładunki są nietypowe (płyty GK, okna, rury, elementy meblowe).
 ## Model biznesowy
 Abonament: **19–49 zł miesięcznie**  
 bez aktywnej sprzedaży, prosto z SEO + grup branżowych.
-
