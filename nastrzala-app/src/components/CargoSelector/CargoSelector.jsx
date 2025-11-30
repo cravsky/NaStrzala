@@ -2,9 +2,18 @@ import { useState } from 'react';
 import styles from './CargoSelector.module.css';
 import { cargoTypes } from '../../data/cargo';
 
+// Get unique categories from cargoTypes
+const categories = Array.from(new Set(cargoTypes.map(c => c.category).filter(Boolean)));
+
 function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedCargoType, setSelectedCargoType] = useState('');
   const [quantity, setQuantity] = useState(1);
+
+  // Filter cargo by selected category
+  const filteredCargo = selectedCategory
+    ? cargoTypes.filter(c => c.category === selectedCategory)
+    : [];
 
   const handleAddCargo = () => {
     if (!selectedCargoType) return;
@@ -14,32 +23,46 @@ function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
         ...cargoType,
         quantity: quantity
       });
-      // Do not reset selectedCargoType – allow rapid repeated adds of same type
-      setQuantity(1); // reset quantity only
+      setQuantity(1);
     }
   };
 
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Wybierz ładunek</h3>
-      
       <div className={styles.selectorGroup}>
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Kategoria:</label>
+          <select
+            value={selectedCategory}
+            onChange={e => {
+              setSelectedCategory(e.target.value);
+              setSelectedCargoType(''); // reset cargo selection
+            }}
+            className={styles.select}
+          >
+            <option value="">-- Wybierz kategorię --</option>
+            {categories.map(cat => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
+        </div>
         <div className={styles.inputGroup}>
           <label className={styles.label}>Typ ładunku:</label>
           <select
             value={selectedCargoType}
-            onChange={(e) => setSelectedCargoType(e.target.value)}
+            onChange={e => setSelectedCargoType(e.target.value)}
             className={styles.select}
+            disabled={!selectedCategory}
           >
             <option value="">-- Wybierz typ --</option>
-            {cargoTypes.map((cargo) => (
+            {filteredCargo.map(cargo => (
               <option key={cargo.cargo_id} value={cargo.cargo_id}>
                 {cargo.label} ({cargo.dimensions.length}×{cargo.dimensions.width}×{cargo.dimensions.height} mm)
               </option>
             ))}
           </select>
         </div>
-
         <div className={styles.inputGroup}>
           <label className={styles.label}>Ilość:</label>
           <input
@@ -47,11 +70,10 @@ function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
             min="1"
             max="100"
             value={quantity}
-            onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+            onChange={e => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
             className={styles.numberInput}
           />
         </div>
-
         <button
           onClick={handleAddCargo}
           disabled={!selectedCargoType}
@@ -61,7 +83,6 @@ function CargoSelector({ onCargoSelected, selectedCargo, onRemoveCargo }) {
           Dodaj ładunek
         </button>
       </div>
-
       {selectedCargo && selectedCargo.length > 0 && (
         <div className={styles.selectedList}>
           <h4 className={styles.listTitle}>Wybrane ładunki:</h4>

@@ -65,6 +65,9 @@ export interface CargoDefinition {
   /** Human readable label for UI. */
   label?: string;
 
+  /** Category for UI filtering (e.g., "pallets-and-containers"). */
+  category?: string;
+
   /** Unit used for the dimensions (solver will normalise to mm). */
   unit: LengthUnit;
 
