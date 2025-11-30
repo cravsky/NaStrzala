@@ -32,11 +32,21 @@ export interface ScoreContext {
   mirrorTargetY?: number; // desired mirrored Y for symmetry
   centerOffsetBefore?: number; // current center-of-mass offset along width before placement
   centerOffsetAfter?: number; // projected offset after placement
+  frontRowCount?: number;
+  frontRowCapacity?: number;
+  isNewFrontSlot?: boolean;
+  centerBandOccupied?: boolean;
 }
 
 // Weight constants (initial calibration; may be tuned later)
 const W_PLATE_WALL = 60;
 const W_BOX_FLOOR = 30;
+const W_BOX_FRONT_GRADIENT = 85;
+const W_BOX_FRONT_ANCHOR = 50;
+const W_BOX_FILL_FRONT = 150;
+const P_BOX_SKIP_FRONT = -140;
+const P_BOX_STACK_BEFORE_FRONT = -220;
+const W_BOX_WALL = 35;
 const W_LONG_FLOOR = 20;
 const W_HEAVY_FLOOR = 40;
 const P_HEAVY_HIGH = -80;
@@ -47,6 +57,9 @@ const W_FRONT_PALLET = 15; // additional bonus for pallet-type cargo near bulkhe
 const P_EXCESS_GAP = -30;
 const W_STACK_CONTINUE = 35;
 const W_STACK_CONTINUE_FRONT = 20;
+const W_VERTICAL_CENTER = 320;
+const P_VERTICAL_CENTER_MISS = -280;
+const P_BOX_STACK_CENTER_LOCK = -260;
 // Column balancing weights (pallet-specific heuristics)
 const P_NEW_COLUMN_EXCESS = -400; // escalated penalty (kept for safety though we now hard cap)
 const P_COLUMN_IMBALANCE = -120; // stronger penalty for widening spread
@@ -73,7 +86,9 @@ export function computePlacementScore(ctx: ScoreContext, preferredGap: number): 
     newFootprint, distinctFootprints, currentFootprintHeight, minColumnHeight, maxColumnHeight, heightSpreadAfter, maxColumns,
     palletRowCounts, firstIncompleteRowX, isStartingNewRow, candidateRowX,
     frontRowBaseYs, isFrontRowCandidate, mirrorTargetY,
-    centerOffsetBefore = 0, centerOffsetAfter = 0 } = ctx;
+    centerOffsetBefore = 0, centerOffsetAfter = 0,
+    frontRowCount, frontRowCapacity, isNewFrontSlot,
+    centerBandOccupied } = ctx;
   let score = 0;
 
   const floor = isInFloor(anchor[2], size[2], zones);
@@ -84,8 +99,43 @@ export function computePlacementScore(ctx: ScoreContext, preferredGap: number): 
   const frontThreshold = zones.length * 0.4; // front region upper bound (minX .. frontThreshold)
 
   // Behavior-zone bonuses
-  if (piece.meta.behavior === "PLATE" && wall) score += W_PLATE_WALL;
-  if (piece.meta.behavior === "BOX" && floor) score += W_BOX_FLOOR;
+    if (piece.meta.behavior === "PLATE" && wall) score += W_PLATE_WALL;
+    let frontRowIncomplete = false;
+    if (typeof frontRowCount === "number" && typeof frontRowCapacity === "number") {
+    frontRowIncomplete = frontRowCount < frontRowCapacity;
+  }
+  const centerReserved = !centerBandOccupied;
+
+    if (piece.meta.behavior === "BOX" && wall) score += W_BOX_WALL;
+    if (piece.meta.behavior === "BOX" && floor) {
+    score += W_BOX_FLOOR;
+    const frontGradient = 1 - Math.min(centerX / zones.length, 1);
+    score += W_BOX_FRONT_GRADIENT * frontGradient;
+    if (isFrontRowCandidate) score += W_BOX_FRONT_ANCHOR;
+    if (frontRowIncomplete && !isFrontRowCandidate) score += P_BOX_SKIP_FRONT;
+    if (frontRowIncomplete && isNewFrontSlot) score += W_BOX_FILL_FRONT;
+  }
+  if (piece.meta.behavior === "BOX" && !floor && frontRowIncomplete) {
+    score += P_BOX_STACK_BEFORE_FRONT;
+  }
+  if (piece.meta.behavior === "BOX" && !floor && centerReserved && !piece.flags.vertical) {
+    score += P_BOX_STACK_CENTER_LOCK;
+  }
+
+    if (piece.flags.vertical) {
+      const pieceCenterY = anchor[1] + size[1] / 2;
+      const deltaToCenter = Math.abs(pieceCenterY - zones.width / 2);
+      if (!centerBandOccupied) {
+        const normalized = 1 - Math.min(deltaToCenter / (zones.width / 2), 1);
+        score += W_VERTICAL_CENTER * normalized;
+      } else {
+        const overshoot = Math.max(0, deltaToCenter - zones.width * 0.15);
+        if (overshoot > 0) {
+          const penaltyScale = Math.min(overshoot / (zones.width / 2), 1);
+          score += P_VERTICAL_CENTER_MISS * penaltyScale;
+        }
+      }
+    }
   if (piece.meta.behavior === "LONG" && floor) score += W_LONG_FLOOR;
 
   // Weight-floor relationship

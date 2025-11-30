@@ -4,6 +4,7 @@
 
 import type { VehicleDefinition } from "../../types/vehicle-types";
 import type { FreeBox } from "../../types/solver-types";
+const MIN_CORRIDOR_WIDTH = 500; // mm; skip corridor if aisle would be useless
 
 /**
  * Create initial free-space boxes for vehicle, carving out wheel arches.
@@ -32,6 +33,37 @@ export function initializeFreeSpace(vehicle: VehicleDefinition): FreeBox[] {
     }
   }
 
+  freeBoxes = addCenterCorridor(freeBoxes, vehicle);
+
+  return freeBoxes;
+}
+
+function addCenterCorridor(freeBoxes: FreeBox[], vehicle: VehicleDefinition): FreeBox[] {
+  if (!vehicle.wheel_arches?.length) return freeBoxes;
+  const { width, length, height } = vehicle.cargo_space;
+  let leftInset = 0;
+  let rightInset = 0;
+  for (const arch of vehicle.wheel_arches) {
+    const [ax, ay] = arch.position;
+    const [, aw] = arch.size;
+    if (ay === 0) {
+      leftInset = Math.max(leftInset, aw);
+    }
+    const archEndY = ay + aw;
+    if (Math.abs(archEndY - width) <= 1) {
+      rightInset = Math.max(rightInset, aw);
+    }
+  }
+  const corridorMinY = leftInset;
+  const corridorMaxY = width - rightInset;
+  const corridorWidth = corridorMaxY - corridorMinY;
+  if (corridorWidth < MIN_CORRIDOR_WIDTH) {
+    return freeBoxes;
+  }
+  freeBoxes.push({
+    min: { x: 0, y: corridorMinY, z: 0 },
+    max: { x: length, y: corridorMaxY, z: height },
+  });
   return freeBoxes;
 }
 

@@ -47,7 +47,8 @@ export function solve(request: SolverRequest): SolverResponse {
   if (DEBUG) logInitialSpace(vehicle, initialSpace);
 
   // STAGE 3B: Initialize heuristic zones (floor & wall bands)
-  const config = getSolverConfig();
+  const hasVerticalDemand = groupedSequence.some(p => p.flags.vertical);
+  const config = { ...getSolverConfig(), hasVerticalDemand };
   const zones = initializeZones(vehicle, config);
 
   // STAGE 4: Pack pieces into trips

@@ -36,6 +36,35 @@ export function generateAnchors(ctx: AnchorContext): [number, number, number][] 
     anchors.push([free.min.x, anchorY, free.min.z]);
   }
 
+  // Center-line anchor: useful to avoid unused aisle when no long cargo
+  const freeWidth = free.max.y - free.min.y;
+  if (freeWidth > dims.dy) {
+    const globalCenter = zones.width / 2 - dims.dy / 2;
+    const clampedCenter = Math.min(Math.max(globalCenter, free.min.y), free.max.y - dims.dy);
+    if (clampedCenter >= free.min.y && clampedCenter + dims.dy <= free.max.y) {
+      anchors.push([free.min.x, clampedCenter, free.min.z]);
+    }
+    if (piece.flags.vertical) {
+      const localCenter = free.min.y + (freeWidth - dims.dy) / 2;
+      if (localCenter >= free.min.y && localCenter + dims.dy <= free.max.y) {
+        anchors.push([free.min.x, localCenter, free.min.z]);
+      }
+    }
+  }
+
+  if (piece.flags.vertical) {
+    const centerBandMin = zones.width * 0.35;
+    const centerBandMax = zones.width * 0.65 - dims.dy;
+    const bandStart = Math.max(centerBandMin, free.min.y);
+    const bandEnd = Math.min(centerBandMax, free.max.y - dims.dy);
+    if (bandEnd >= bandStart) {
+      anchors.push([free.min.x, bandStart, free.min.z]);
+      if (bandEnd > bandStart) {
+        anchors.push([free.min.x, bandEnd, free.min.z]);
+      }
+    }
+  }
+
   // Cluster adjacency: same group placements – attempt snug positions beside them.
   const sameGroup = existing.filter(p => p.piece.cargo_id === piece.cargo_id && p.piece.meta.behavior === piece.meta.behavior);
   // Pallet explicit second-footprint anchor along length (X) before stacking growth

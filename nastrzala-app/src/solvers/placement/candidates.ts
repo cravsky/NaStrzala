@@ -54,17 +54,36 @@ export function buildPlacementCandidates(
 ): PlacementCandidate[] {
   const orientations = getAllowedOrientationsForPiece(piece);
   const sameGroup = existing.filter(p => p.piece.cargo_id === piece.cargo_id && p.piece.meta.behavior === piece.meta.behavior);
-  const palletFloorPlacements = sameGroup.filter(p => p.anchor[2] === 0);
+  const floorPlacements = sameGroup.filter(p => p.anchor[2] === 0);
   let frontRowMinX = Infinity;
-  for (const gp of palletFloorPlacements) {
+  for (const gp of floorPlacements) {
     if (gp.anchor[0] < frontRowMinX) frontRowMinX = gp.anchor[0];
   }
   const FRONT_ROW_TOL = 5;
-  const frontRowBaseYs = Number.isFinite(frontRowMinX)
-    ? palletFloorPlacements
-        .filter(p => Math.abs(p.anchor[0] - frontRowMinX) <= FRONT_ROW_TOL)
-        .map(p => p.anchor[1])
+  const frontRowEntries = Number.isFinite(frontRowMinX)
+    ? floorPlacements.filter(p => Math.abs(p.anchor[0] - frontRowMinX) <= Math.max(FRONT_ROW_TOL, p.size[0] * 0.1))
     : [];
+  const frontRowBaseYs = frontRowEntries.length
+    ? Array.from(new Set(frontRowEntries.map(p => p.anchor[1])))
+    : [];
+  const frontRowThickness = frontRowEntries.length
+    ? Math.max(...frontRowEntries.map(p => p.size[0]))
+    : piece.meta.dims_mm.length;
+  const baseRowWidth = piece.meta.dims_mm.width;
+  const frontRowCapacity = Math.min(2, Math.max(1, Math.floor(vehicle.cargo_space.width / baseRowWidth)));
+  const frontRowIncomplete = frontRowEntries.length < frontRowCapacity;
+  const centerBandMin = zones.width * 0.35;
+  const centerBandMax = zones.width * 0.65;
+  const walkwayStartX = (Number.isFinite(frontRowMinX) ? frontRowMinX : 0) + frontRowThickness + 5;
+  const centerBandOccupied = existing.some(p => {
+    if (!p.piece.flags.vertical) return false;
+    if (p.anchor[2] !== 0) return false;
+    if (p.anchor[0] < walkwayStartX) return false;
+    const minY = p.anchor[1];
+    const maxY = p.anchor[1] + p.size[1];
+    return minY < centerBandMax && maxY > centerBandMin;
+  });
+  const centerReserved = config.hasVerticalDemand && !centerBandOccupied;
   const totalMass = existing.reduce((sum, p) => sum + (p.piece.weight_kg || 0), 0);
   const weightedCenterY = existing.reduce((sum, p) => sum + (p.piece.weight_kg || 0) * (p.anchor[1] + p.size[1] / 2), 0);
   const vehicleCenterY = vehicle.cargo_space.width / 2;
@@ -88,6 +107,16 @@ export function buildPlacementCandidates(
   // Sort free boxes; bulkhead confirmed at minX so prioritize low X for pallets
   const sorted = [...freeBoxes].sort((a, b) => {
     if (a.min.z !== b.min.z) return a.min.z - b.min.z;
+    if (piece.flags.vertical) {
+      const centerLine = zones.width / 2;
+      const aCenter = (a.min.y + a.max.y) / 2;
+      const bCenter = (b.min.y + b.max.y) / 2;
+      const aDist = Math.abs(aCenter - centerLine);
+      const bDist = Math.abs(bCenter - centerLine);
+      if (aDist !== bDist) return aDist - bDist;
+      if (a.min.x !== b.min.x) return a.min.x - b.min.x;
+      return a.min.y - b.min.y;
+    }
     if (/pallet/i.test(piece.cargo_id)) {
       // front-first (ascending X), then width (Y) ascending
       if (a.min.x !== b.min.x) return a.min.x - b.min.x;
@@ -103,7 +132,13 @@ export function buildPlacementCandidates(
       if (!fitsInFreeBox(free, dims)) continue;
       const size: [number, number, number] = [dims.dx, dims.dy, dims.dz];
       const anchors = generateAnchors({ free, piece, dims, existing, zones, config });
-      for (const anchor of anchors) {
+      for (const rawAnchor of anchors) {
+        let anchor: [number, number, number] = rawAnchor;
+        if (piece.flags.vertical && rawAnchor[0] < walkwayStartX) {
+          const shiftedX = Math.max(walkwayStartX, free.min.x);
+          if (shiftedX + size[0] > free.max.x) continue;
+          anchor = [shiftedX, rawAnchor[1], rawAnchor[2]];
+        }
         if (!anchorInsideFree(free, anchor, size)) continue;
         // Hard vehicle bounds guard (defensive) to prevent out-of-container placements.
         if (
@@ -114,6 +149,9 @@ export function buildPlacementCandidates(
         ) continue;
         if (overlapsExisting(anchor, size, existing)) continue;
 
+        if (piece.flags.vertical && anchor[2] > 0) {
+          continue; // tall appliances must remain on the floor
+        }
         // Stacking: if above floor (z>0) require full support coverage and valid stacking rules.
         if (anchor[2] > 0) {
           const supports = gatherSupportsForPlacement(anchor, size, existing);
@@ -187,25 +225,26 @@ export function buildPlacementCandidates(
           }
         }
 
-        // Front-row mirror context for pallets (symmetry across vehicle longitudinal axis)
+        // Front-row detection (bulkhead-aligned footprint)
         let isFrontRowCandidate = false;
         let mirrorTargetY: number | undefined;
         let effectiveFrontRow = Number.isFinite(frontRowMinX) ? frontRowMinX : undefined;
-        if (/pallet/i.test(piece.cargo_id)) {
-          if (anchor[2] === 0) {
-            if (effectiveFrontRow === undefined) {
-              effectiveFrontRow = anchor[0];
-            }
-            const rowTol = Math.max(FRONT_ROW_TOL, size[0] * 0.1);
-            if (Math.abs(anchor[0] - (effectiveFrontRow ?? anchor[0])) <= rowTol) {
-              isFrontRowCandidate = true;
-            }
-            if (isFrontRowCandidate && frontRowBaseYs.length === 1) {
-              const mirrored = zones.width - size[1] - frontRowBaseYs[0];
-              mirrorTargetY = mirrored;
-            }
+        if (anchor[2] === 0) {
+          if (effectiveFrontRow === undefined) {
+            effectiveFrontRow = anchor[0];
+          }
+          const rowTol = Math.max(FRONT_ROW_TOL, size[0] * 0.1);
+          if (Math.abs(anchor[0] - (effectiveFrontRow ?? anchor[0])) <= rowTol) {
+            isFrontRowCandidate = true;
           }
         }
+        if (/pallet/i.test(piece.cargo_id) && isFrontRowCandidate && frontRowBaseYs.length === 1) {
+          const mirrored = zones.width - size[1] - frontRowBaseYs[0];
+          mirrorTargetY = mirrored;
+        }
+        const frontRowYTol = Math.max(10, size[1] * 0.15);
+        const isFrontSlotTaken = frontRowBaseYs.some(y => Math.abs(y - anchor[1]) <= frontRowYTol);
+        const isNewFrontSlot = isFrontRowCandidate && anchor[2] === 0 && !isFrontSlotTaken;
 
         // Center-of-mass offset after placing this candidate (all cargo types)
         const candidateWeight = piece.weight_kg || 0;
@@ -243,6 +282,24 @@ export function buildPlacementCandidates(
           }
         }
 
+        const isCenterSlot = candidateCenterY >= centerBandMin && candidateCenterY <= centerBandMax;
+        if (
+          piece.meta.behavior === "BOX" &&
+          isCenterSlot &&
+          !piece.flags.vertical &&
+          (centerReserved || frontRowIncomplete)
+        ) {
+          continue; // keep center aisle free until vertical cargo claims it and front rows are populated
+        }
+        if (
+          piece.meta.behavior === "BOX" &&
+          anchor[2] > 0 &&
+          !piece.flags.vertical &&
+          centerReserved
+        ) {
+          continue; // defer upper layers until aisle lock releases
+        }
+
         const score = computePlacementScore({
           piece,
           anchor,
@@ -267,6 +324,10 @@ export function buildPlacementCandidates(
           mirrorTargetY,
           centerOffsetBefore,
           centerOffsetAfter,
+          frontRowCount: frontRowBaseYs.length,
+          frontRowCapacity,
+          isNewFrontSlot,
+          centerBandOccupied,
         }, config.groupGapRatio * zones.width);
 
         candidates.push({ anchor, size, orientation: ori, score, freeRef: free, dims });

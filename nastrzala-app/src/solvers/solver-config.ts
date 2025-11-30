@@ -6,6 +6,7 @@ export interface SolverConfig {
   floorHeightRatio: number; // 0..1 portion of vehicle height considered Floor zone
   wallBandRatio: number;    // 0..0.5 portion of width on each side considered Wall band
   groupGapRatio: number;    // 0..0.05 portion of width used as preferred horizontal gap (XY)
+  hasVerticalDemand: boolean; // true when request contains any vertical cargo
 }
 
 const DEFAULT_FLOOR_HEIGHT_RATIO = 0.40;
@@ -27,5 +28,6 @@ export function getSolverConfig(): SolverConfig {
     floorHeightRatio: DEFAULT_FLOOR_HEIGHT_RATIO,
     wallBandRatio: DEFAULT_WALL_BAND_RATIO,
     groupGapRatio,
+    hasVerticalDemand: false,
   };
 }

@@ -3,12 +3,14 @@
 // Provides deterministic ordering for group-wise packing.
 
 import type { CargoPiece } from "../../types/cargo-types";
+import { packingPriorityBucket } from "./priority-sorter";
 
 export interface CargoPieceGroup {
   key: string; // cargo_id + behavior
   cargo_id: string;
   behavior: string;
   pieces: CargoPiece[];
+  priorityBucket: number;
 }
 
 export function groupPiecesByBehavior(pieces: CargoPiece[]): CargoPieceGroup[] {
@@ -17,18 +19,29 @@ export function groupPiecesByBehavior(pieces: CargoPiece[]): CargoPieceGroup[] {
     const key = `${p.cargo_id}::${p.meta.behavior}`;
     let grp = map.get(key);
     if (!grp) {
-      grp = { key, cargo_id: p.cargo_id, behavior: p.meta.behavior, pieces: [] };
+      grp = {
+        key,
+        cargo_id: p.cargo_id,
+        behavior: p.meta.behavior,
+        pieces: [],
+        priorityBucket: packingPriorityBucket(p),
+      };
       map.set(key, grp);
     }
     grp.pieces.push(p);
+    grp.priorityBucket = Math.min(grp.priorityBucket, packingPriorityBucket(p));
   }
   // Deterministic sort: by behavior class order, then cargo_id, then piece index.
   const behaviorOrder: Record<string, number> = { LONG: 0, PLATE: 1, BOX: 2 };
   const weightRank = { HEAVY: 0, MEDIUM: 1, LIGHT: 2 } as const;
   const groups = Array.from(map.values()).sort((a, b) => {
-    // Primary: behavior order
+    // Primary: behavior order keeps structural heuristics (LONG → PLATE → BOX)
     const bo = behaviorOrder[a.behavior] - behaviorOrder[b.behavior];
     if (bo !== 0) return bo;
+    // Within the same behavior, fall back to priority bucket from Stage 2 ordering
+    if (a.priorityBucket !== b.priorityBucket) {
+      return a.priorityBucket - b.priorityBucket;
+    }
     // Secondary: aggregate weight class (smallest rank among pieces)
     const aRank = Math.min(...a.pieces.map(p => weightRank[p.meta.weightClass]));
     const bRank = Math.min(...b.pieces.map(p => weightRank[p.meta.weightClass]));
