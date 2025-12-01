@@ -210,7 +210,7 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
           >
             <boxGeometry args={[boxLength, boxHeight, boxWidth]} />
             <meshStandardMaterial
-              color={doesFit ? "#48bb78" : "#f56565"}
+              color="#48bb78"
               transparent
               opacity={0.7}
             />
@@ -220,7 +220,7 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
             <edgesGeometry>
               <boxGeometry args={[boxLength, boxHeight, boxWidth]} />
             </edgesGeometry>
-            <lineBasicMaterial color={doesFit ? "#2f855a" : "#c53030"} linewidth={2} />
+            <lineBasicMaterial color="#2f855a" linewidth={2} />
           </lineSegments>
         </>
       ) : null}

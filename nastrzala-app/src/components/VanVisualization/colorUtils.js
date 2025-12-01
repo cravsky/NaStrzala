@@ -3,7 +3,6 @@ const cargoColors = [
   '#4299e1',
   '#ed8936',
   '#9f7aea',
-  '#f56565',
   '#38b2ac',
   '#ecc94b',
   '#e91e63',
@@ -11,6 +10,7 @@ const cargoColors = [
   '#8bc34a',
   '#ff9800',
   '#673ab7',
+  '#06b6d4',
 ];
 
 const cargoIdColorMap = new Map();
