@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import * as THREE from 'three';
+import { getCargoColor } from './colorUtils';
 
 export default function VanModel({ vehicle, placements, cargoLength, cargoWidth, cargoHeight, showObstacles = true }) {
   const cargoBoxRef = useRef();
@@ -23,36 +24,8 @@ export default function VanModel({ vehicle, placements, cargoLength, cargoWidth,
   const hasCargo = cargoLength > 0 && cargoWidth > 0 && cargoHeight > 0;
   const hasPlacedItems = placements && placements.length > 0;
   
-  // Color palette for different cargo types - more colors for better distinction
-  const cargoColors = [
-    '#48bb78', // green
-    '#4299e1', // blue
-    '#ed8936', // orange
-    '#9f7aea', // purple
-    '#f56565', // red
-    '#38b2ac', // teal
-    '#ecc94b', // yellow
-    '#e91e63', // pink
-    '#00bcd4', // cyan
-    '#8bc34a', // lime
-    '#ff9800', // deep orange
-    '#673ab7', // deep purple
-  ];
-  
   const bulkheadColor = "#3b82f6"; // visual cue for direction (front / driver side)
   const wallColor = "#718096";
-
-  // Track which cargo IDs we've seen and assign colors sequentially
-  const cargoIdColorMap = {};
-  let colorIndex = 0;
-  
-  const getCargoColor = (cargoId) => {
-    if (!cargoIdColorMap[cargoId]) {
-      cargoIdColorMap[cargoId] = cargoColors[colorIndex % cargoColors.length];
-      colorIndex++;
-    }
-    return cargoIdColorMap[cargoId];
-  };
 
   return (
     <group position={[0, 0, 0]}>

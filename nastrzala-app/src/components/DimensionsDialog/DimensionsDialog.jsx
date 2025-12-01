@@ -1,5 +1,6 @@
 import styles from './DimensionsDialog.module.css';
 import VanVisualization from '../VanVisualization/VanVisualization';
+import { getCargoColor } from '../VanVisualization/colorUtils';
 
 function DimensionsDialog({ vehicle, selectedCargo, solverResult, onClose }) {
   const handleBackdropClick = (event) => {
@@ -18,6 +19,11 @@ function DimensionsDialog({ vehicle, selectedCargo, solverResult, onClose }) {
     Math.max(max, cargo.dimensions?.width || 0), 0) || 0;
   const maxCargoHeight = selectedCargo?.reduce((max, cargo) => 
     Math.max(max, cargo.dimensions?.height || 0), 0) || 0;
+
+  const cargoWithColor = selectedCargo?.map((cargo) => ({
+    ...cargo,
+    color: getCargoColor(cargo.cargo_id),
+  }));
 
   return (
     <div className={styles.backdrop} onClick={handleBackdropClick}>
@@ -63,13 +69,18 @@ function DimensionsDialog({ vehicle, selectedCargo, solverResult, onClose }) {
               </div>
             </div>
 
-            {selectedCargo && selectedCargo.length > 0 && (
+            {cargoWithColor && cargoWithColor.length > 0 && (
               <div className={styles.cargoList}>
                 <h3 className={styles.subtitle}>Wybrane ładunki</h3>
                 <ul className={styles.list}>
-                  {selectedCargo.map((cargo, index) => (
+                  {cargoWithColor.map((cargo, index) => (
                     <li key={index} className={styles.cargoItem}>
                       <div className={styles.cargoInfo}>
+                        <span
+                          className={styles.colorSwatch}
+                          style={{ backgroundColor: cargo.color }}
+                          aria-hidden="true"
+                        />
                         <span className={styles.cargoName}>{cargo.label}</span>
                         <span className={styles.cargoQuantity}>× {cargo.quantity}</span>
                       </div>
