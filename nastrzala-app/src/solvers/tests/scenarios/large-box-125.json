@@ -1,0 +1,53 @@
+{
+  "name": "large-box-125",
+  "unit": "mm",
+  "max_trips": 1,
+  "vehicle": {
+    "vehicle_id": "ducato_l2h2",
+    "brand": "Fiat",
+    "model": "Ducato",
+    "variant": "L2H2",
+    "unit": "mm",
+    "origin": "rear_left_floor_inside",
+    "cargo_space": {
+      "length": 3120,
+      "width": 1870,
+      "height": 1930
+    },
+    "wheel_arches": [
+      {
+        "label": "left",
+        "position": [1550, 0, 0],
+        "size": [360, 225, 250]
+      },
+      {
+        "label": "right",
+        "position": [1550, 1645, 0],
+        "size": [360, 225, 250]
+      }
+    ]
+  },
+  "items": [
+    {
+      "definition": {
+        "cargo_id": "large_box",
+        "label": "Duże pudło",
+        "category": "pallets-and-containers",
+        "unit": "mm",
+        "dimensions": {
+          "length": 600,
+          "width": 400,
+          "height": 400
+        },
+        "weight_kg": 15,
+        "flags": {
+          "stackable": true,
+          "allowRotations": true,
+          "fragile": false,
+          "vertical": false
+        }
+      },
+      "quantity": 125
+    }
+  ]
+}

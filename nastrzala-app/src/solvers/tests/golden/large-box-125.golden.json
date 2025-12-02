@@ -1,0 +1,3439 @@
+{
+  "unit": "mm",
+  "vehicle_id": "ducato_l2h2",
+  "status": "partial",
+  "message": "Only a subset of items could be placed into the available trips.",
+  "summary": {
+    "total_pieces": 125,
+    "placed_pieces": 76,
+    "unplaced_pieces": 49,
+    "trips_used": 1
+  },
+  "trips": [
+    {
+      "index": 0,
+      "items": [
+        {
+          "piece": {
+            "piece_id": "large_box#0",
+            "cargo_id": "large_box",
+            "index": 0,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#1",
+            "cargo_id": "large_box",
+            "index": 1,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            0,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#2",
+            "cargo_id": "large_box",
+            "index": 2,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            0,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#3",
+            "cargo_id": "large_box",
+            "index": 3,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            0,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#4",
+            "cargo_id": "large_box",
+            "index": 4,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            400,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#5",
+            "cargo_id": "large_box",
+            "index": 5,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            400,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#6",
+            "cargo_id": "large_box",
+            "index": 6,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            225,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#7",
+            "cargo_id": "large_box",
+            "index": 7,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            400,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#8",
+            "cargo_id": "large_box",
+            "index": 8,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            400,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#9",
+            "cargo_id": "large_box",
+            "index": 9,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            625,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#10",
+            "cargo_id": "large_box",
+            "index": 10,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            800,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#11",
+            "cargo_id": "large_box",
+            "index": 11,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            800,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#12",
+            "cargo_id": "large_box",
+            "index": 12,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            800,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#13",
+            "cargo_id": "large_box",
+            "index": 13,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            800,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#14",
+            "cargo_id": "large_box",
+            "index": 14,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            1025,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#15",
+            "cargo_id": "large_box",
+            "index": 15,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            1200,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#16",
+            "cargo_id": "large_box",
+            "index": 16,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            1200,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#17",
+            "cargo_id": "large_box",
+            "index": 17,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            1200,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#18",
+            "cargo_id": "large_box",
+            "index": 18,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            1200,
+            0
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#19",
+            "cargo_id": "large_box",
+            "index": 19,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            0,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#20",
+            "cargo_id": "large_box",
+            "index": 20,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            0,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#21",
+            "cargo_id": "large_box",
+            "index": 21,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            0,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#22",
+            "cargo_id": "large_box",
+            "index": 22,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            0,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#23",
+            "cargo_id": "large_box",
+            "index": 23,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            225,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#24",
+            "cargo_id": "large_box",
+            "index": 24,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            400,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#25",
+            "cargo_id": "large_box",
+            "index": 25,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            400,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#26",
+            "cargo_id": "large_box",
+            "index": 26,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            400,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#27",
+            "cargo_id": "large_box",
+            "index": 27,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            400,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#28",
+            "cargo_id": "large_box",
+            "index": 28,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            625,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#29",
+            "cargo_id": "large_box",
+            "index": 29,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            800,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#30",
+            "cargo_id": "large_box",
+            "index": 30,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            800,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#31",
+            "cargo_id": "large_box",
+            "index": 31,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            800,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#32",
+            "cargo_id": "large_box",
+            "index": 32,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            800,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#33",
+            "cargo_id": "large_box",
+            "index": 33,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            1025,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#34",
+            "cargo_id": "large_box",
+            "index": 34,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            1200,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#35",
+            "cargo_id": "large_box",
+            "index": 35,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            1200,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#36",
+            "cargo_id": "large_box",
+            "index": 36,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            1200,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#37",
+            "cargo_id": "large_box",
+            "index": 37,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            1200,
+            400
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#38",
+            "cargo_id": "large_box",
+            "index": 38,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            0,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#39",
+            "cargo_id": "large_box",
+            "index": 39,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            0,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#40",
+            "cargo_id": "large_box",
+            "index": 40,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            0,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#41",
+            "cargo_id": "large_box",
+            "index": 41,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            0,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#42",
+            "cargo_id": "large_box",
+            "index": 42,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            225,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#43",
+            "cargo_id": "large_box",
+            "index": 43,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            400,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#44",
+            "cargo_id": "large_box",
+            "index": 44,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            400,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#45",
+            "cargo_id": "large_box",
+            "index": 45,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            400,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#46",
+            "cargo_id": "large_box",
+            "index": 46,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            400,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#47",
+            "cargo_id": "large_box",
+            "index": 47,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            625,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#48",
+            "cargo_id": "large_box",
+            "index": 48,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            800,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#49",
+            "cargo_id": "large_box",
+            "index": 49,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            800,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#50",
+            "cargo_id": "large_box",
+            "index": 50,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            800,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#51",
+            "cargo_id": "large_box",
+            "index": 51,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            800,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#52",
+            "cargo_id": "large_box",
+            "index": 52,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            1025,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#53",
+            "cargo_id": "large_box",
+            "index": 53,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            1200,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#54",
+            "cargo_id": "large_box",
+            "index": 54,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            1200,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#55",
+            "cargo_id": "large_box",
+            "index": 55,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            1200,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#56",
+            "cargo_id": "large_box",
+            "index": 56,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            1200,
+            800
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#57",
+            "cargo_id": "large_box",
+            "index": 57,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            0,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#58",
+            "cargo_id": "large_box",
+            "index": 58,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            0,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#59",
+            "cargo_id": "large_box",
+            "index": 59,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            0,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#60",
+            "cargo_id": "large_box",
+            "index": 60,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            0,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#61",
+            "cargo_id": "large_box",
+            "index": 61,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            225,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#62",
+            "cargo_id": "large_box",
+            "index": 62,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            400,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#63",
+            "cargo_id": "large_box",
+            "index": 63,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            400,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#64",
+            "cargo_id": "large_box",
+            "index": 64,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            400,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#65",
+            "cargo_id": "large_box",
+            "index": 65,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            400,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#66",
+            "cargo_id": "large_box",
+            "index": 66,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            625,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#67",
+            "cargo_id": "large_box",
+            "index": 67,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            800,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#68",
+            "cargo_id": "large_box",
+            "index": 68,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            800,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#69",
+            "cargo_id": "large_box",
+            "index": 69,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            800,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#70",
+            "cargo_id": "large_box",
+            "index": 70,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            800,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#71",
+            "cargo_id": "large_box",
+            "index": 71,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1200,
+            1025,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#72",
+            "cargo_id": "large_box",
+            "index": 72,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            0,
+            1200,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#73",
+            "cargo_id": "large_box",
+            "index": 73,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            600,
+            1200,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#74",
+            "cargo_id": "large_box",
+            "index": 74,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            1910,
+            1200,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        },
+        {
+          "piece": {
+            "piece_id": "large_box#75",
+            "cargo_id": "large_box",
+            "index": 75,
+            "dimensions": {
+              "length": 600,
+              "width": 400,
+              "height": 400
+            },
+            "weight_kg": 15,
+            "flags": {
+              "stackable": true,
+              "allowRotations": true,
+              "fragile": false,
+              "vertical": false
+            },
+            "meta": {
+              "dims_mm": {
+                "length": 600,
+                "width": 400,
+                "height": 400
+              },
+              "volume_m3": 0.096,
+              "density_kg_per_m3": 156.25,
+              "is_long": false,
+              "is_heavy": false,
+              "is_light": false,
+              "long_axis": null,
+              "behavior": "BOX",
+              "weightClass": "MEDIUM"
+            }
+          },
+          "orientation": 0,
+          "anchor": [
+            2510,
+            1200,
+            1200
+          ],
+          "size": [
+            600,
+            400,
+            400
+          ]
+        }
+      ]
+    }
+  ]
+}
