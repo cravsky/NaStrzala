@@ -1,3 +1,9 @@
+⚠️ **PROJECT STATUS: ON HOLD**
+
+This project has been suspended after approximately 30 hours of development. Development was halted due to challenges with the 3D cargo packing solver algorithm and concerns regarding viable monetization strategies.
+
+---
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
